@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="schr.js"></script>
     <script src="display.js"></script>
-    <script src="jquery-2.1.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/1.1.0/dygraph-combined.js"></script>
   </head>
   <body>
     <table id="wrap">
@@ -17,14 +17,16 @@
             <div id="left_col_content">
                 Potenziale
                 <input type="text" id="potential"/><br />
-                Numero di punti<br />
-                <input type="text" id="npoint" value="250" /><br />
+                <br />
+                Dominio:<br />
+                Numero di punti 
+                <input type="number" id="npoint" step="any" value="250" /><br />
                 
                 <table>
 					<tr>
 						<td>
 							Inizio
-							<input type="number" id="int_start" step="any" value="-1" size="6" /></td>
+							<input type="number" id="int_start" step="any" value="-1" /></td>
 						<td>
 							Fine
 							<input type="number" id="int_end" step="any" value="1" /></td>
