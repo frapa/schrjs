@@ -153,6 +153,7 @@ function manage(data) {
     
     self.postMessage({'msg': 'finished', ev: ev, ef: ef, t:t});
     self.close();
+    display(data.D, data.V, ev, ef, t);
 }
 
 self.addEventListener('message', function(e) {
