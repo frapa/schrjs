@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="schr.js"></script>
     <script src="display.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/1.1.0/dygraph-combined.js"></script>
+    <script src="dygraph-combined.js"></script>
   </head>
   <body>
     <table id="wrap">
@@ -18,31 +18,32 @@
                 Potenziale
                 <input type="text" id="potential"/><br />
                 <br />
-                Dominio:<br />
-                Numero di punti 
-                <input type="number" id="npoint" step="any" value="250" /><br />
-                
+                Dominio:<br />                
                 <table>
 					<tr>
-						<td>
+						<td class="bottom">
 							Inizio
 							<input type="number" id="int_start" step="any" value="-1" /></td>
-						<td>
+						<td class="bottom">
 							Fine
 							<input type="number" id="int_end" step="any" value="1" /></td>
 					</tr>
                 </table>
+                Suddiviso in:
+                <input type="number" id="npoint" step="any" value="250" /><br />
                 
                 <br />
                 Condizioni al contorno:
                 <table>
 					<tr>
-						<td>
+						<td class="bottom">
 							Inizio
-							<input type="number" id="b_start" step="any" value="0" /></td>
-						<td>
+							<input type="number" id="b_start" step="any" value="0"/>
+						</td>
+						<td class="bottom">
 							Fine
-							<input type="number" id="b_end" step="any" value="1" /></td>
+							<input type="number" id="b_end" step="any" value="1" />
+						</td>
 					</tr>
                 </table>
                 
@@ -50,33 +51,61 @@
                 Intervallo di energia degli autovalori:
                 <table>
 					<tr>
-						<td>
-							Da
+						<td class="bottom">
+							da
 							<input type="number" id="b_start" step="any" value="0" /></td>
-						<td>
-							A
+						<td class="bottom">
+							a
 							<input type="number" id="b_end" step="any" value="1" /></td>
 					</tr>
                 </table>
                 
+                <br />
+                
+                Costante di Planck:
+                <br />
+				<div class="styled-select">
+					<select id="planck">
+							<option value="1/(2*pi)" selected="selected">ħ=1</option>
+							<option value="1">h=1</option>
+							<option value="6.626269E-34">h=6.626269E-34 J s</option>
+							<!--<option value="6.626269E-34">h=6.626269E-27 erg s</option>-->
+					</select>
+				</div>
                 
                 <br />
-				<input type="button" id="solve" value="Risolvi"/>
+                
+                <table>
+					<tr>
+						<td class="bottom">
+							<input type="button" id="solve" value="Risolvi" onclick="start_computation();"/>
+						<td class="bottom">
+							<input type="reset" id="reset" value="Reset"/>
+					</tr>
+                </table>
             </div>
             
         </td>
         <td id="right_col">
             <div id="right_col_content">
             
-            to plot function
-            
+            to plot function  <br/>
+            <input type="button" id="prova" value="prova" onclick="display(0,0,0,0);"/><br />
+			<table>
+					<tr>
+						<td class="bottom">
+							<div id="graphdiv1sx"></div>
+						<td class="bottom">
+							<div id="graphdiv1dx"></div>
+					</tr>
+            </table>
             
             <div id="bottom_bar">
                 <table>
 					<tr>
 						<td class="bottom">
 							Inizio
-							<input type="number" id="b_start" step="any" value="0" size="6" /></td>
+							<input type="number" id="b_start" step="any" value="0"/></td>
 						<td class="bottom">
 							<!--<input type="checkbox" id="norm" >Normalizza<br />-->
 							<input type="checkbox" id="prob" >Mostra probabilità<br />
@@ -91,5 +120,9 @@
         </td>
       <tr>
     </table>
+    <div id="wait_popup">Sto computando le soluzioni dell'equazione
+						<br /> prego aspettare
+						<br /> <br />
+						<input type="reset" id="reset" value="Reset" onclick="hide_popup();"/></div>
   </body>
 </html>
