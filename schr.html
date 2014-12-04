@@ -1,23 +1,91 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Schr</title>
+    <title>Schrodinger Time Independent Equation Javascript Solver</title>
     <link rel="stylesheet" href="style.css">
     <script src="schr.js"></script>
+    <script src="display.js"></script>
+    <script src="jquery-2.1.1.min.js"></script>
   </head>
   <body>
     <table id="wrap">
       <tr>
         <td id="left_col">
-            <div id="logo">Schr</div>
+            <div id="logo">Schrodinger</div>
             <div id="left_col_content">
-                Potential
-                <input type="text" />
+                Potenziale
+                <input type="text" id="potential"/><br />
+                Numero di punti<br />
+                <input type="text" id="npoint" value="250" /><br />
+                
+                <table>
+					<tr>
+						<td>
+							Inizio
+							<input type="number" id="int_start" step="any" value="-1" size="6" /></td>
+						<td>
+							Fine
+							<input type="number" id="int_end" step="any" value="1" /></td>
+					</tr>
+                </table>
+                
+                <br />
+                Condizioni al contorno:
+                <table>
+					<tr>
+						<td>
+							Inizio
+							<input type="number" id="b_start" step="any" value="0" /></td>
+						<td>
+							Fine
+							<input type="number" id="b_end" step="any" value="1" /></td>
+					</tr>
+                </table>
+                
+                <br />
+                Intervallo di energia degli autovalori:
+                <table>
+					<tr>
+						<td>
+							Da
+							<input type="number" id="b_start" step="any" value="0" /></td>
+						<td>
+							A
+							<input type="number" id="b_end" step="any" value="1" /></td>
+					</tr>
+                </table>
+                
+                
+                <br />
+				<input type="button" id="solve" value="Risolvi"/>
             </div>
+            
         </td>
         <td id="right_col">
+            <div id="right_col_content">
             
+            to plot function
+            
+            
+            <div id="bottom_bar">
+                <table>
+					<tr>
+						<td class="bottom">
+							Inizio
+							<input type="number" id="b_start" step="any" value="0" size="6" /></td>
+						<td class="bottom">
+							<!--<input type="checkbox" id="norm" >Normalizza<br />-->
+							<input type="checkbox" id="prob" >Mostra probabilità<br />
+							
+							<br />
+							<input type="button" id="export" value="Esporta dati" onclick="alert('dati in csv');"/>
+					</tr>
+                </table>
+			</div>
+            
+            </div>
         </td>
       <tr>
     </table>

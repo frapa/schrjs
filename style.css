@@ -1,7 +1,7 @@
 html {
     height: 100%;
     font-family: sans-serif;
-    font-weight: thin;
+    font-weight: normal;/*lighter;*/
     font-size: large;
 }
 
@@ -31,10 +31,6 @@ body {
     color: white;
 }
 
-#right_col {
-    vertical-align: top;
-}
-
 #logo {
     padding: 0.5em;
     font-family: sans-serif;
@@ -45,11 +41,39 @@ body {
     font-weight: bold;
 }
 
+#right_col {
+    vertical-align: top;
+}
+
+#right_col_content {
+    padding: 1.5em;
+}
+
+#bottom_bar {
+    padding: 0.5em;
+    font-family: sans-serif;
+    background: #50B0D0;
+    border-top: 0.15em solid #33A1C9;
+    color: white;
+}
+
 input[type=text] {
     padding: 0.25em;
     height: 1em;
     background: white;
-    border: 2px solid #33A1C9;
-    border-radius: 4px;
+    border: 0.1em solid #33A1C9;
+    border-radius: 0.25em;
     font-size: large;
+}
+
+input[type=button] {
+	display: block;
+	background: white;
+	border: 0;/*0.15em solid #33A1C9;*/
+	font-size: large;
+	border-radius: 0.25em;
+	box-shadow: 0 0.2em 0 #33A1C9;
+}
+td.bottom {
+	width: 50%;
 }
