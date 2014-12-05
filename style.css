@@ -125,3 +125,7 @@ input[type=number] {
 #table {
 	width: 100%;
 }
+
+#probdiv {
+	padding-left:1.2em
+}

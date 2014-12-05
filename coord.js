@@ -35,7 +35,7 @@ function solve() {
         var data = e.data;
         switch (data.msg) {
             case 'started':
-                start_computation();
+				show_popup("wait_popup");
                 break;
             case 'finished':
 				hide_popup("wait_popup");

@@ -74,8 +74,8 @@ function display(D, V, ev, ef, t=0) {
 		);*/
 }
 
-function start_computation() {
-	var popup= document.getElementById("wait_popup");
+function show_popup(name) {
+	var popup = document.getElementById(name);
 	popup.style.visibility = "visible";
 }
 
@@ -84,7 +84,14 @@ function hide_popup(name) {
 	popup.style.visibility = "hidden";
 }
 
-/*function reset() {
-	var = document.getElementById("");
-	.value=
-*/
+function check() {
+	var norm = document.getElementById("norm");
+	var prob = document.getElementById("prob");
+	if (norm.checked == false) {
+		prob.checked = false;
+		prob.setAttribute('disabled', 'disabled');
+	}
+	if (norm.checked == true) {
+		prob.removeAttribute('disabled');
+	}
+}

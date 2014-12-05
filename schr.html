@@ -107,9 +107,10 @@
 						<td class="bottom">
 							<div id="labelsDX"></div>
 						<td class="bottom">
-							<!--<input type="checkbox" id="norm" >Normalizza<br />-->
-							<input type="checkbox" id="prob" >Mostra probabilità<br />
-							
+							<input type="checkbox" id="norm" onclick="check();">&#09;Normalizza<br />
+							<div id="probdiv">
+							<input type="checkbox" id="prob" disabled="disabled">&#09;Mostra probabilità<br />
+							</div>
 							<br />
 							<input type="button" id="export" value="Esporta dati" onclick="alert('dati in formato csv');"/>
 					</tr>
