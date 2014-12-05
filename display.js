@@ -27,39 +27,53 @@ function array2csv(D, ef) {
     return csv;
 }
 
-function create_data(D,ef) {
+function create_data(D,ef,ev) {
 	//var resultsT2 = [['x'],['Y1'],['Y2']];
 	var Da = D.array;
-	var results = [Da,ef[0],ef[1]]; 									//funziona solo per un array ef di dimensione 2xY con Y arbitrario! <-- FIX THIS SHIT
+	//var results = [Da,ef[0],ef[1],ef[3],ef[4],ef[5],ef[6],ef[7]]; 	//funziona solo per un array ef di dimensione 2xY con Y arbitrario! <-- FIX THIS SHIT
+	var results = [Da,ef[0]];
+	for (var i = 1; i < ev.length; i++) {
+        results.push(ef[i]);											//questo dovrebbe funzionare... almeno mi pare. è dinamico..?
+	}
+        
 	var resultsT = transpose(results);
 	//resultsT2.push.apply(resultsT2,resultsT);
 	//console.log(resultsT2)
 	return resultsT
 }
 
+function create_V_data(D,V) {
+	var Da = D.array;
+	var results = [Da,V];
+	var resultsT = transpose(results);
+	return resultsT
+}
+
 //dominio, potential, eigenvalues, eigenfunction, computation time
 function display(D, V, ev, ef, t=0) {
     
+    console.log("ev",ev);
+    
     g = new Dygraph(
-		document.getElementById("graphsx"),
-		create_data(D,ef),//array2csv(D, ef),
+		document.getElementById("graphup"),
+		create_data(D,ef,ev),//array2csv(D, ef),
 		{
 		legend: 'always',
 		labelsDiv: document.getElementById('labelsSX'),
 		labelsSeparateLines: true,
-		labels: ["X", "Y1", "Y2"]
+		//labels: ["X", "Y1", "Y2"]										//usare l'array ev possibilmente in seguito
 		}
 		);
     //console.log(array2csv(D, ef));
     
     f = new Dygraph(
-		document.getElementById("graphdx"),
-		create_data(D,ef),
+		document.getElementById("graphdown"),
+		create_V_data(D,V),
 		{
 		legend: 'always',
 		labelsDiv: document.getElementById('labelsDX'),
 		labelsSeparateLines: true,
-		labels: ["X", "Y1", "Y2"]
+		labels: ["X", "potenziale"]
 		}
 		);
 		

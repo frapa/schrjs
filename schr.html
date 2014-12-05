@@ -3,7 +3,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Schrodinger Time Independent Equation Javascript Solver</title>
+    <title>Time Independent Schrödinger Equation Javascript Solver</title>
+    <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="style.css">
     <script src="parser.js"></script>
     <script src="schr.js"></script>
@@ -15,7 +16,7 @@
     <table id="wrap">
       <tr>
         <td id="left_col">
-            <div id="logo">Schrodinger</div>
+            <div id="logo">Schrödinger</div>
             <div id="left_col_content">
                 Potenziale
                 <input type="text" id="potential" value="0"/><br />
@@ -26,9 +27,11 @@
 						<td class="pair">
 							Inizio
 							<input type="number" id="int_start" step="any" value="-1" /></td>
+						</td>
 						<td class="pair">
 							Fine
 							<input type="number" id="int_end" step="any" value="1" /></td>
+						</td>
 					</tr>
                 </table>
                 Suddiviso in:
@@ -56,9 +59,11 @@
 						<td class="pair">
 							da
 							<input type="number" id="E_start" step="any" value="0" /></td>
+						</td>
 						<td class="pair">
 							a
 							<input type="number" id="E_end" step="any" value="10" /></td>
+						</td>
 					</tr>
                 </table>
                 
@@ -77,14 +82,25 @@
                 
                 <br />
                 
+                <input type="checkbox" id="norm" onclick="check();">&#09;Normalizza<br />
+				<div id="probdiv">
+				<input type="checkbox" id="prob" disabled="disabled">&#09;Mostra probabilità<br />
+				</div>
+                
+                <br />
+                
                 <table id="table">
 					<tr>
 						<td class="pair">
 							<input type="button" id="solve" value="Risolvi" onclick="solve();"/>
+						</td>
 						<td class="pair">
 							<input type="reset" id="reset" value="Reset" onclick="potential.value='0';int_start.value='-1';int_end.value='1';npoint.value='250';b_start.value='1';b_end.value='2';E_start.value='0';E_end.value='10';planck.defaultSelected"/>
+						</td>
 					</tr>
                 </table>
+                <br>
+                <div style="italic">Esempio: 0, -3.5, 3.5, 5000, 0, 0, 0, 1000, ħ=1</div>
             </div>
         </td>
         <td id="right_col">
@@ -92,20 +108,32 @@
 			
 			<table id="table">
 				<tr>
-					<td class="pair">
-						<div id="graphsx"></div>
-					<td class="pair">
-						<div id="graphdx"></div>
+					<td class="graphs"><!--class="graph_pair">-->
+						densità di probabilità e potenziale<br /><br />
+						<div id="graphup" style="width:100%;"></div>
+						<br />
+						<!--potenziale<br /><br />-->
+						<div id="graphdown" style="width:100%;"></div>
+					</td>
+					<td class="legend"><!--class="graph_pair">-->
+						<div id="right_bar">
+							<div id="labelsSX"></div>
+							<br />
+							<input type="button" id="export" value="Esporta dati" onclick="alert([[1,2,3],[4,5,6],[7,8,9]].join('\n'));"/><!--"alert('dati in formato csv');"/>-->
+						</div>
+					</td>
 				</tr>
             </table>
             
+            <!--
             <div id="bottom_bar">
                 <table id="table">
 					<tr>
-						<td class="bottom">
+						<td class="pair"><!--<td class="bottom">- ->
 							<div id="labelsSX"></div>
-						<td class="bottom">
+						<td class="pair"><!--<td class="bottom">- ->
 							<div id="labelsDX"></div>
+						<!--
 						<td class="bottom">
 							<input type="checkbox" id="norm" onclick="check();">&#09;Normalizza<br />
 							<div id="probdiv">
@@ -113,9 +141,13 @@
 							</div>
 							<br />
 							<input type="button" id="export" value="Esporta dati" onclick="alert('dati in formato csv');"/>
+						- ->
 					</tr>
                 </table>
+				<br />
+				<input type="button" id="export" value="Esporta dati" onclick="alert('dati in formato csv');"/>
 			</div>
+            -->
             
             </div>
         </td>

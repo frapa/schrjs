@@ -46,10 +46,19 @@ body {
 }
 
 #right_col_content {
-    padding: 1.5em;
+    padding: 0.5em;
+	visibility: hidden;
 }
 
 #bottom_bar {
+    padding: 0.5em;
+    font-family: sans-serif;
+    background: #50B0D0;
+    border: 0.15em solid #33A1C9;
+    color: white;
+}
+
+#right_bar {
     padding: 0.5em;
     font-family: sans-serif;
     background: #50B0D0;
@@ -77,6 +86,11 @@ input[type=button], input[type=reset] {
 .pair {
 	width: 50%;
 }
+.graph_pair {
+	width: 50%;
+	text-align: center;
+}
+
 .bottom {
 	width: 33%;
 }
@@ -128,4 +142,21 @@ input[type=number] {
 
 #probdiv {
 	padding-left:1.2em
+}
+
+.graphs {
+	width: 70%;
+	height: 100%;
+	text-align: center;
+	padding: 0.5em
+}
+
+.legend {
+	width: 30%;
+	height: 100%;
+	text-align: center;
+	padding: 0.5em
+}
+graphup {
+	padding: 1em;
 }
