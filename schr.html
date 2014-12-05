@@ -18,15 +18,15 @@
             <div id="logo">Schrodinger</div>
             <div id="left_col_content">
                 Potenziale
-                <input type="text" id="potential"/><br />
+                <input type="text" id="potential" value="0"/><br />
                 <br />
                 Dominio:<br />                
-                <table>
+                <table id="table">
 					<tr>
-						<td class="bottom">
+						<td class="pair">
 							Inizio
 							<input type="number" id="int_start" step="any" value="-1" /></td>
-						<td class="bottom">
+						<td class="pair">
 							Fine
 							<input type="number" id="int_end" step="any" value="1" /></td>
 					</tr>
@@ -36,13 +36,13 @@
                 
                 <br />
                 Condizioni al contorno:
-                <table>
+                <table id="table">
 					<tr>
-						<td class="bottom">
+						<td class="pair">
 							Inizio
 							<input type="number" id="b_start" step="any" value="1"/>
 						</td>
-						<td class="bottom">
+						<td class="pair">
 							Fine
 							<input type="number" id="b_end" step="any" value="2" />
 						</td>
@@ -51,12 +51,12 @@
                 
                 <br />
                 Intervallo di energia degli autovalori:
-                <table>
+                <table id="table">
 					<tr>
-						<td class="bottom">
+						<td class="pair">
 							da
 							<input type="number" id="E_start" step="any" value="0" /></td>
-						<td class="bottom">
+						<td class="pair">
 							a
 							<input type="number" id="E_end" step="any" value="10" /></td>
 					</tr>
@@ -77,34 +77,41 @@
                 
                 <br />
                 
-                <table>
+                <table id="table">
 					<tr>
-						<td class="bottom">
+						<td class="pair">
 							<input type="button" id="solve" value="Risolvi" onclick="solve();"/>
-						<td class="bottom">
-							<input type="reset" id="reset" value="Reset"/>
+						<td class="pair">
+							<input type="reset" id="reset" value="Reset" onclick="potential.value='0';int_start.value='-1';int_end.value='1';npoint.value='250';b_start.value='1';b_end.value='2';E_start.value='0';E_end.value='10';planck.defaultSelected"/>
 					</tr>
                 </table>
             </div>
-            
         </td>
         <td id="right_col">
             <div id="right_col_content">
-            
-			<div id="graph"></div>
+			
+			<table id="table">
+				<tr>
+					<td class="pair">
+						<div id="graphsx"></div>
+					<td class="pair">
+						<div id="graphdx"></div>
+				</tr>
+            </table>
             
             <div id="bottom_bar">
-                <table>
+                <table id="table">
 					<tr>
 						<td class="bottom">
-							Inizio
-							<input type="number" id="b_start" step="any" value="0"/></td>
+							<div id="labelsSX"></div>
+						<td class="bottom">
+							<div id="labelsDX"></div>
 						<td class="bottom">
 							<!--<input type="checkbox" id="norm" >Normalizza<br />-->
 							<input type="checkbox" id="prob" >Mostra probabilità<br />
 							
 							<br />
-							<input type="button" id="export" value="Esporta dati" onclick="alert('dati in csv');"/>
+							<input type="button" id="export" value="Esporta dati" onclick="alert('dati in formato csv');"/>
 					</tr>
                 </table>
 			</div>
@@ -113,9 +120,12 @@
         </td>
       <tr>
     </table>
-    <div id="wait_popup">Sto computando le soluzioni dell'equazione
+    <div id="wait_popup">
+						<br />Sto computando le soluzioni dell'equazione
 						<br /> prego aspettare
 						<br /> <br />
-						<input type="reset" id="reset" value="Reset" onclick="hide_popup();"/></div>
+						<input type="reset" id="hide" value="Nascondi" onclick="hide_popup('wait_popup');"/></div>
+    <div id="data_popup">
+						<input type="reset" id="hide" value="Nascondi" onclick="hide_popup(data_popup);"/></div>
   </body>
 </html>

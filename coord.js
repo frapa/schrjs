@@ -38,6 +38,7 @@ function solve() {
                 start_computation();
                 break;
             case 'finished':
+				hide_popup("wait_popup");
                 display(D, V, data.ev, data.ef, data.t);
                 break;
         };

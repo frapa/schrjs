@@ -74,8 +74,11 @@ input[type=button], input[type=reset] {
 	border-radius: 0.25em;
 	box-shadow: 0 0.2em 0 #33A1C9;
 }
+.pair {
+	width: 50%;
+}
 .bottom {
-	width: 0.5%;
+	width: 33%;
 }
 
 input[type=number] {
@@ -99,8 +102,26 @@ input[type=number] {
 	top: 40%;
 	width: 20%;
 	height: 20%;
-	background: red;
+    background: #6FBEDA;
 	padding: 1em;
 	text-align: center;
 	vertical-align: middle;
+}
+
+#data_popup {
+	position: fixed;
+	visibility: hidden;
+	left: 25%;
+	top: 10%;
+	width: 50%;
+	height: 80%;
+    background: #317ADE;
+	border: 0.1em solid #63A1C9;
+	padding: 1em;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#table {
+	width: 100%;
 }
