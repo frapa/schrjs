@@ -1,22 +1,13 @@
-function transpose(D, ef) {
-    var tr_array = new Array();
-
-    // This assumes all arrays in args have the same length
-    for (var i = 0; i < D.length; i++) {
-        var row = [D[i]];
-
-        // This cycles all the arrays
-        for (var j = 0; j < ef.length; j++) {
-            row.push(ef[j][i]);
-        }
-
-        tr_array.push(row);
-    }
-
-    return tr_array;
+function transpose(a) {
+	var newArray = a[0].map(function(col, i) { 
+		return a.map(function(row) { 
+		return row[i] 
+		})
+	});
+	return newArray
 }
 
-/*function array2csv(D, ef) {
+function array2csv(D, ef) {
     var csv = "";
     
     for (var i = 0; i < D.length; i++) {
@@ -38,7 +29,7 @@ function transpose(D, ef) {
 
 function create_data(D,ef,ev) {
 	//var resultsT2 = [['x'],['Y1'],['Y2']];
-	var Da = D.array; // questo dovrebbe essere .as_array(). .array può fallire se non è già stato inizializzato.
+	var Da = D.array;
 	//var results = [Da,ef[0],ef[1],ef[3],ef[4],ef[5],ef[6],ef[7]]; 	//funziona solo per un array ef di dimensione 2xY con Y arbitrario! <-- FIX THIS SHIT
 	var results = [Da,ef[0]];
 	for (var i = 1; i < ev.length; i++) {
@@ -56,25 +47,25 @@ function create_V_data(D,V) {
 	var results = [Da,V];
 	var resultsT = transpose(results);
 	return resultsT
-}*/
+}
 
 //dominio, potential, eigenvalues, eigenfunction, computation time
 function display(D, V, ev, ef, t=0) {
-    console.log(transpose(D, ef));
     g = new Dygraph(
-	    document.getElementById("graphup"),
-	    transpose(D.as_array(), ef),
+		document.getElementById("graphup"),
+		create_data(D,ef,ev),//array2csv(D, ef),
 		{
-		    legend: 'always',
-		    labelsDiv: document.getElementById('labelsSX'),
-		    labelsSeparateLines: true,
-		    //labels: ["X", "Y1", "Y2"]										//usare l'array ev possibilmente in seguito
+		legend: 'always',
+		labelsDiv: document.getElementById('labelsSX'),
+		labelsSeparateLines: true,
+		//labels: ["X", "Y1", "Y2"]										//usare l'array ev possibilmente in seguito
 		}
-	);
+		);
+    //console.log(array2csv(D, ef));
     
     f = new Dygraph(
 		document.getElementById("graphdown"),
-		transpose(D.as_array(), [V]),
+		create_V_data(D,V),
 		{
 		legend: 'always',
 		labelsDiv: document.getElementById('labelsDX'),
