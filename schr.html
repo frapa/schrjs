@@ -18,92 +18,101 @@
         <td id="left_col">
             <div id="logo">Schrödinger</div>
             <div id="left_col_content">
-                Potenziale
-                <input type="text" id="potential" value="0"/><br />
-                <br />
-                Dominio:<br />                
-                <table id="table">
-					<tr>
-						<td class="pair">
-							Inizio
-							<input type="number" id="int_start" step="any" value="-1" /></td>
-						</td>
-						<td class="pair">
-							Fine
-							<input type="number" id="int_end" step="any" value="1" /></td>
-						</td>
-					</tr>
-                </table>
-                Suddiviso in:
-                <input type="number" id="npoint" step="any" value="250" /><br />
+                <!-------------------------- ->
+                <table>
                 
-                <br />
-                Condizioni al contorno:
-                <table id="table">
-					<tr>
-						<td class="pair">
-							Inizio
-							<input type="number" id="b_start" step="any" value="1"/>
-						</td>
-						<td class="pair">
-							Fine
-							<input type="number" id="b_end" step="any" value="2" />
-						</td>
-					</tr>
-                </table>
-                
-                <br />
-                Autovalori:<br />
-                <form>
-                <input type="radio" name="eigenvalue" value="interval" checked onclick="E_number.setAttribute('disabled', 'disabled');E_start.removeAttribute('disabled');E_end.removeAttribute('disabled');">intervallo di energia
-                <table id="table">
-					<tr>
-						<td class="pair">
-							da
-							<input type="number" id="E_start" step="any" value="0" /></td>
-						</td>
-						<td class="pair">
-							a
-							<input type="number" id="E_end" step="any" value="10" /></td>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							dE:
-							<input type="number" id="dE" step="any" value="250" /><br />
-						</td>
-					</tr>
-                </table>
-                <input type="radio" name="eigenvalue" value="number" disabled="disabled" onclick="E_number.removeAttribute('disabled');E_start.setAttribute('disabled', 'disabled');E_end.setAttribute('disabled', 'disabled');">numero
-                <!--<br />-->
-				<div id="numberdiv">
-				<input type="number" title="at the moment not working" id="E_number" disabled="disabled">
-				</div>
-                </form>
-                
-                <br />
-                
-                Costante di Planck:
-                <br />
-				<div class="styled-select">
-					<select id="planck">
-							<option value="1/(2*pi)" selected="selected">ħ=1</option>
-							<option value="1">h=1</option>
-							<option value="6.626269E-34">h=6.626269E-34 J s</option>
-							<!--<option value="6.626269E-34">h=6.626269E-27 erg s</option>-->
-					</select>
+                <!--------------------------->
+                <div id="element">
+					Potenziale
+					<input type="text" id="potential" value="0"/><br />
 				</div>
                 
-                <br />
-                
-                <input type="checkbox" id="norm" onclick="norm_check();">&#09;Normalizza<br />
-				<div id="probdiv">
-				<input type="checkbox" id="prob" disabled="disabled">&#09;Mostra probabilità<br />
+                <div id="element">
+					Dominio:<br />                
+					<table id="table">
+						<tr>
+							<td class="pair">
+								Inizio
+								<input type="number" id="int_start" step="any" value="-1" /></td>
+							</td>
+							<td class="pair">
+								Fine
+								<input type="number" id="int_end" step="any" value="1" /></td>
+							</td>
+						</tr>
+					</table>
+					Suddiviso in:
+					<input type="number" id="npoint" step="any" value="250" /><br />
 				</div>
                 
-                <br />
+                <div id="element">
+					Condizioni al contorno:
+					<table id="table">
+						<tr>
+							<td class="pair">
+								Inizio
+								<input type="number" id="b_start" step="any" value="1"/>
+							</td>
+							<td class="pair">
+								Fine
+								<input type="number" id="b_end" step="any" value="2" />
+							</td>
+						</tr>
+					</table>
+                </div>
                 
-                <table id="table">
+                <div id="element">
+					Autovalori:<br />
+					<form>
+					<input type="radio" name="eigenvalue" value="interval" checked onclick="E_number.setAttribute('disabled', 'disabled');E_start.removeAttribute('disabled');E_end.removeAttribute('disabled');">intervallo di energia
+					<table id="table">
+						<tr>
+							<td class="pair">
+								da
+								<input type="number" id="E_start" step="any" value="0" /></td>
+							</td>
+							<td class="pair">
+								a
+								<input type="number" id="E_end" step="any" value="10" /></td>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								dE:
+								<input type="number" id="dE" step="any" value="250" /><br />
+							</td>
+						</tr>
+					</table>
+					<input type="radio" name="eigenvalue" value="number" disabled="disabled" onclick="E_number.removeAttribute('disabled');E_start.setAttribute('disabled', 'disabled');E_end.setAttribute('disabled', 'disabled');">numero
+					<!--<br />-->
+					<div id="numberdiv">
+					<input type="number" title="at the moment not working" id="E_number" disabled="disabled">
+					</div>
+					</form>
+				</div>
+                
+                <div id="element">
+					Costante di Planck:
+					<br />
+					<div class="styled-select">
+						<select id="planck">
+								<option value="1/(2*pi)" selected="selected">ħ=1</option>
+								<option value="1">h=1</option>
+								<option value="6.626269E-34">h=6.626269E-34 J s</option>
+								<!--<option value="6.626269E-34">h=6.626269E-27 erg s</option>-->
+						</select>
+					</div>
+				</div>
+                
+                <div id="element">
+					<input type="checkbox" id="norm" onclick="norm_check();">&#09;Normalizza<br />
+					<div id="probdiv">
+						<input type="checkbox" id="prob" disabled="disabled">&#09;Mostra probabilità<br />
+					</div>
+				</div>
+
+                <div class="element">
+				<table id="table">
 					<tr>
 						<td class="pair">
 							<input type="button" id="solve" value="Risolvi" onclick="solve();"/>
@@ -112,17 +121,25 @@
 							<input type="reset" id="reset" value="Reset" onclick="examples(0)"/>
 						</td>
 					</tr>
-                </table>
-                <br>
+				</table>
+				</div>
                 
-                <div class="styled-select">
+                <div id="element">
 					Esempi:<br />
+					<div class="styled-select">
 					<select id="examples" onchange="examples(value)">
 							<option value="0" selected="selected">V = 0 in [-1, 1]</option>
 							<option value="1">V = 0 in [-3.5, 3.5]</option>
 							<option value="2">V = x^2 in [-2.25, 2.25]</option>
-							<option value="3">V = abs(x) in [-3.5, 3.5]</option>
+							<option value="3">V = abs(x) in [-3.5, 3.5]</option>							
+							<option value="4">V = 0.5*x^2 in [-5, 5]</option>
 					</select>
+					</div>
+					
+                <!-------------------------- ->
+                </table>
+                
+                <!--------------------------->
 				</div>
             </div>
         </td>
