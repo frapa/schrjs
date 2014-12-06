@@ -36,6 +36,7 @@ function solve() {
         switch (data.msg) {
             case 'started':
 				show_popup("wait_popup");
+				hide_popup('right_col_content');
                 break;
             case 'finished':
 				hide_popup("wait_popup");

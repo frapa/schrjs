@@ -52,7 +52,7 @@ function create_V_data(D,V) {
 //dominio, potential, eigenvalues, eigenfunction, computation time
 function display(D, V, ev, ef, t=0) {
     
-    console.log("ev",ev);
+    //console.log("ev",ev);
     
     g = new Dygraph(
 		document.getElementById("graphup"),
@@ -98,7 +98,7 @@ function hide_popup(name) {
 	popup.style.visibility = "hidden";
 }
 
-function check() {
+function norm_check() {
 	var norm = document.getElementById("norm");
 	var prob = document.getElementById("prob");
 	if (norm.checked == false) {
@@ -107,5 +107,66 @@ function check() {
 	}
 	if (norm.checked == true) {
 		prob.removeAttribute('disabled');
+	}
+}
+
+function examples(i) {
+	var pot = document.getElementById("potential");
+    var int_start = document.getElementById("int_start");
+    var int_end = document.getElementById("int_end");    
+    var npoint = document.getElementById("npoint");
+    var b_start = document.getElementById("b_start");
+    var b_end = document.getElementById("b_end");
+    var E_start = document.getElementById("E_start");
+    var E_end = document.getElementById("E_end");
+    var E_number = document.getElementById("E_number");
+    
+	if (i == 0) {
+		pot.value='0';
+		int_start.value='-1';
+		int_end.value='1';
+		npoint.value='250';
+		b_start.value='1';
+		b_end.value='2';
+		E_start.value='0';
+		E_end.value='10';
+		E_number='';
+		//planck.defaultSelected;
+	}
+	if (i == 1) {
+		pot.value='0';
+		int_start.value='-3.5';
+		int_end.value='3.5';
+		npoint.value='5000';
+		b_start.value='0';
+		b_end.value='0';
+		E_start.value='0';
+		E_end.value='1000';
+		E_number='';
+		//planck.defaultSelected;
+	}
+	if (i == 2) {
+		pot.value='x*x';
+		int_start.value='-1.5';
+		int_end.value='1.5';
+		npoint.value='5000';
+		b_start.value='2.25';
+		b_end.value='2.25';
+		E_start.value='0';
+		E_end.value='1000';
+		E_number='';
+		//planck.defaultSelected;
+	}
+	if (i == 3) {
+		pot.value='abs(x)';
+		int_start.value='-3.5';
+		int_end.value='3.5';
+		npoint.value='5000';
+		b_start.value='3.5';
+		b_end.value='3.5';
+		E_start.value='0';
+		E_end.value='1000';
+		E_number='';
+		//planck.defaultSelected;
 	}
 }

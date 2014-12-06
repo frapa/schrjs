@@ -53,7 +53,9 @@
                 </table>
                 
                 <br />
-                Intervallo di energia degli autovalori:
+                Autovalori:<br />
+                <form>
+                <input type="radio" name="eigenvalue" value="interval" checked onclick="E_number.setAttribute('disabled', 'disabled');E_start.removeAttribute('disabled');E_end.removeAttribute('disabled');">intervallo di energia
                 <table id="table">
 					<tr>
 						<td class="pair">
@@ -66,6 +68,12 @@
 						</td>
 					</tr>
                 </table>
+                <input type="radio" name="eigenvalue" value="number" disabled="disabled" onclick="E_number.removeAttribute('disabled');E_start.setAttribute('disabled', 'disabled');E_end.setAttribute('disabled', 'disabled');">numero
+                <!--<br />-->
+				<div id="numberdiv">
+				<input type="number" title="at the moment not working" id="E_number" disabled="disabled">
+				</div>
+                </form>
                 
                 <br />
                 
@@ -82,7 +90,7 @@
                 
                 <br />
                 
-                <input type="checkbox" id="norm" onclick="check();">&#09;Normalizza<br />
+                <input type="checkbox" id="norm" onclick="norm_check();">&#09;Normalizza<br />
 				<div id="probdiv">
 				<input type="checkbox" id="prob" disabled="disabled">&#09;Mostra probabilità<br />
 				</div>
@@ -95,12 +103,21 @@
 							<input type="button" id="solve" value="Risolvi" onclick="solve();"/>
 						</td>
 						<td class="pair">
-							<input type="reset" id="reset" value="Reset" onclick="potential.value='0';int_start.value='-1';int_end.value='1';npoint.value='250';b_start.value='1';b_end.value='2';E_start.value='0';E_end.value='10';planck.defaultSelected"/>
+							<input type="reset" id="reset" value="Reset" onclick="examples(0)"/>
 						</td>
 					</tr>
                 </table>
                 <br>
-                <div style="italic">Esempio: 0, -3.5, 3.5, 5000, 0, 0, 0, 1000, ħ=1</div>
+                
+                <div class="styled-select">
+					Esempi:<br />
+					<select id="examples" onchange="examples(value)">
+							<option value="0" selected="selected">V = 0 in [-1, 1]</option>
+							<option value="1">V = 0 in [-3.5, 3.5]</option>
+							<option value="2">V = x^2 in [-2.25, 2.25]</option>
+							<option value="3">V = abs(x) in [-3.5, 3.5]</option>
+					</select>
+				</div>
             </div>
         </td>
         <td id="right_col">
