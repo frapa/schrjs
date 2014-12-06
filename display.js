@@ -120,6 +120,7 @@ function examples(i) {
     var E_start = document.getElementById("E_start");
     var E_end = document.getElementById("E_end");
     var E_number = document.getElementById("E_number");
+    var dE = document.getElementById("dE");
     
 	if (i == 0) {
 		pot.value='0';
@@ -130,7 +131,8 @@ function examples(i) {
 		b_end.value='2';
 		E_start.value='0';
 		E_end.value='10';
-		E_number='';
+		E_number.value='';
+		dE.value='';
 		//planck.defaultSelected;
 	}
 	if (i == 1) {
@@ -142,7 +144,8 @@ function examples(i) {
 		b_end.value='0';
 		E_start.value='0';
 		E_end.value='1000';
-		E_number='';
+		E_number.value='';
+		dE.value='';
 		//planck.defaultSelected;
 	}
 	if (i == 2) {
@@ -154,7 +157,8 @@ function examples(i) {
 		b_end.value='2.25';
 		E_start.value='0';
 		E_end.value='1000';
-		E_number='';
+		E_number.value='';
+		dE.value='';
 		//planck.defaultSelected;
 	}
 	if (i == 3) {
@@ -166,7 +170,8 @@ function examples(i) {
 		b_end.value='3.5';
 		E_start.value='0';
 		E_end.value='1000';
-		E_number='';
+		E_number.value='';
+		dE.value='';
 		//planck.defaultSelected;
 	}
 }
