@@ -3,95 +3,185 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Schrodinger Time Independent Equation Javascript Solver</title>
+    <title>Time Independent Schrödinger Equation Javascript Solver</title>
+    <link rel="icon" href="favicon.png">
     <link rel="stylesheet" href="style.css">
     <script src="parser.js"></script>
     <script src="schr.js"></script>
     <script src="display.js"></script>
     <script src="coord.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/1.1.0/dygraph-combined.js"></script>
+    <script src="dygraph-combined.js"></script>
   </head>
   <body>
     <table id="wrap">
       <tr>
         <td id="left_col">
-            <div id="logo">Schrodinger</div>
+            <div id="logo">Schrödinger</div>
             <div id="left_col_content">
                 Potenziale
-                <input type="text" id="potential"/><br />
+                <input type="text" id="potential" value="0"/><br />
                 <br />
-                Dominio:<br />
-                Numero di punti 
-                <input type="number" id="npoint" step="any" value="250" /><br />
-                
-                <table>
+                Dominio:<br />                
+                <table id="table">
 					<tr>
-						<td>
+						<td class="pair">
 							Inizio
 							<input type="number" id="int_start" step="any" value="-1" /></td>
-						<td>
+						</td>
+						<td class="pair">
 							Fine
 							<input type="number" id="int_end" step="any" value="1" /></td>
+						</td>
 					</tr>
                 </table>
+                Suddiviso in:
+                <input type="number" id="npoint" step="any" value="250" /><br />
                 
                 <br />
                 Condizioni al contorno:
-                <table>
+                <table id="table">
 					<tr>
-						<td>
+						<td class="pair">
 							Inizio
-							<input type="number" id="b_start" step="any" value="0" /></td>
-						<td>
+							<input type="number" id="b_start" step="any" value="1"/>
+						</td>
+						<td class="pair">
 							Fine
-							<input type="number" id="b_end" step="any" value="1" /></td>
+							<input type="number" id="b_end" step="any" value="2" />
+						</td>
 					</tr>
                 </table>
                 
                 <br />
-                Intervallo di energia degli autovalori:
-                <table>
+                Autovalori:<br />
+                <form>
+                <input type="radio" name="eigenvalue" value="interval" checked onclick="E_number.setAttribute('disabled', 'disabled');E_start.removeAttribute('disabled');E_end.removeAttribute('disabled');">intervallo di energia
+                <table id="table">
+					<tr>
+						<td class="pair">
+							da
+							<input type="number" id="E_start" step="any" value="0" /></td>
+						</td>
+						<td class="pair">
+							a
+							<input type="number" id="E_end" step="any" value="10" /></td>
+						</td>
+					</tr>
 					<tr>
 						<td>
-							Da
-							<input type="number" id="E_start" step="any" value="0" /></td>
-						<td>
-							A
-							<input type="number" id="E_end" step="any" value="1" /></td>
+							dE:
+							<input type="number" id="dE" step="any" value="250" /><br />
+						</td>
 					</tr>
                 </table>
-                
+                <input type="radio" name="eigenvalue" value="number" disabled="disabled" onclick="E_number.removeAttribute('disabled');E_start.setAttribute('disabled', 'disabled');E_end.setAttribute('disabled', 'disabled');">numero
+                <!--<br />-->
+				<div id="numberdiv">
+				<input type="number" title="at the moment not working" id="E_number" disabled="disabled">
+				</div>
+                </form>
                 
                 <br />
-				<input type="button" id="solve" onclick="solve();" value="Risolvi"/>
+                
+                Costante di Planck:
+                <br />
+				<div class="styled-select">
+					<select id="planck">
+							<option value="1/(2*pi)" selected="selected">ħ=1</option>
+							<option value="1">h=1</option>
+							<option value="6.626269E-34">h=6.626269E-34 J s</option>
+							<!--<option value="6.626269E-34">h=6.626269E-27 erg s</option>-->
+					</select>
+				</div>
+                
+                <br />
+                
+                <input type="checkbox" id="norm" onclick="norm_check();">&#09;Normalizza<br />
+				<div id="probdiv">
+				<input type="checkbox" id="prob" disabled="disabled">&#09;Mostra probabilità<br />
+				</div>
+                
+                <br />
+                
+                <table id="table">
+					<tr>
+						<td class="pair">
+							<input type="button" id="solve" value="Risolvi" onclick="solve();"/>
+						</td>
+						<td class="pair">
+							<input type="reset" id="reset" value="Reset" onclick="examples(0)"/>
+						</td>
+					</tr>
+                </table>
+                <br>
+                
+                <div class="styled-select">
+					Esempi:<br />
+					<select id="examples" onchange="examples(value)">
+							<option value="0" selected="selected">V = 0 in [-1, 1]</option>
+							<option value="1">V = 0 in [-3.5, 3.5]</option>
+							<option value="2">V = x^2 in [-2.25, 2.25]</option>
+							<option value="3">V = abs(x) in [-3.5, 3.5]</option>
+					</select>
+				</div>
             </div>
-            
         </td>
         <td id="right_col">
             <div id="right_col_content">
-            
-            to plot function
-            
-            
-            <div id="bottom_bar">
-                <table>
-					<tr>
-						<td class="bottom">
-							Inizio
-							<input type="number" id="b_start" step="any" value="0" size="6" /></td>
-						<td class="bottom">
-							<!--<input type="checkbox" id="norm" >Normalizza<br />-->
-							<input type="checkbox" id="prob" >Mostra probabilità<br />
-							
+			
+			<table id="table">
+				<tr>
+					<td class="graphs"><!--class="graph_pair">-->
+						densità di probabilità e potenziale<br /><br />
+						<div id="graphup" style="width:100%;"></div>
+						<br />
+						<!--potenziale<br /><br />-->
+						<div id="graphdown" style="width:100%;"></div>
+					</td>
+					<td class="legend"><!--class="graph_pair">-->
+						<div id="right_bar">
+							<div id="labelsSX"></div>
 							<br />
-							<input type="button" id="export" value="Esporta dati" onclick="alert('dati in csv');"/>
+							<input type="button" id="export" value="Esporta dati" onclick="alert([[1,2,3],[4,5,6],[7,8,9]].join('\n'));"/><!--"alert('dati in formato csv');"/>-->
+						</div>
+					</td>
+				</tr>
+            </table>
+            
+            <!--
+            <div id="bottom_bar">
+                <table id="table">
+					<tr>
+						<td class="pair"><!--<td class="bottom">- ->
+							<div id="labelsSX"></div>
+						<td class="pair"><!--<td class="bottom">- ->
+							<div id="labelsDX"></div>
+						<!--
+						<td class="bottom">
+							<input type="checkbox" id="norm" onclick="check();">&#09;Normalizza<br />
+							<div id="probdiv">
+							<input type="checkbox" id="prob" disabled="disabled">&#09;Mostra probabilità<br />
+							</div>
+							<br />
+							<input type="button" id="export" value="Esporta dati" onclick="alert('dati in formato csv');"/>
+						- ->
 					</tr>
                 </table>
+				<br />
+				<input type="button" id="export" value="Esporta dati" onclick="alert('dati in formato csv');"/>
 			</div>
+            -->
             
             </div>
         </td>
       <tr>
     </table>
+    <div id="wait_popup">
+						<br />Sto computando le soluzioni dell'equazione
+						<br /> prego aspettare
+						<br /> <br />
+						<input type="reset" id="hide" value="Nascondi" onclick="hide_popup('wait_popup');"/></div>
+    <div id="data_popup">
+						<input type="reset" id="hide" value="Nascondi" onclick="hide_popup(data_popup);"/></div>
   </body>
 </html>
