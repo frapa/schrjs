@@ -27,7 +27,10 @@ body {
 }
 
 #left_col_content {
-    padding: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
     color: white;
 }
 
@@ -136,9 +139,9 @@ input[type=number] {
 	vertical-align: middle;
 }
 
-#table {
+/*#table {
 	width: 100%;
-}
+}*/
 
 #probdiv {
 	padding-left:1.2em
@@ -164,4 +167,8 @@ graphup {
 }
 #numberdiv {
 	padding-left:1.7em
+}
+#element {
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
 }

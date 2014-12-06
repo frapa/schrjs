@@ -180,4 +180,17 @@ function examples(i) {
 		dE.value='';
 		//planck.defaultSelected;
 	}
+	if (i == 4) {
+		pot.value='0.5*x^2';
+		int_start.value='-5';
+		int_end.value='5';
+		npoint.value='5000';
+		b_start.value='12.5';
+		b_end.value='12.5';
+		E_start.value='0';
+		E_end.value='1000';
+		E_number.value='';
+		dE.value='';
+		//planck.defaultSelected;
+	}
 }
