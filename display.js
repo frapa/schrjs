@@ -139,7 +139,7 @@ function examples(i) {
 		pot.value='0';
 		int_start.value='-3.5';
 		int_end.value='3.5';
-		npoint.value='5000';
+		npoint.value='1000';
 		b_start.value='0';
 		b_end.value='0';
 		E_start.value='0';
@@ -152,7 +152,7 @@ function examples(i) {
 		pot.value='x*x';
 		int_start.value='-1.5';
 		int_end.value='1.5';
-		npoint.value='5000';
+		npoint.value='1000';
 		b_start.value='2.25';
 		b_end.value='2.25';
 		E_start.value='0';
@@ -165,7 +165,7 @@ function examples(i) {
 		pot.value='abs(x)';
 		int_start.value='-3.5';
 		int_end.value='3.5';
-		npoint.value='5000';
+		npoint.value='1000';
 		b_start.value='3.5';
 		b_end.value='3.5';
 		E_start.value='0';
@@ -178,7 +178,7 @@ function examples(i) {
 		pot.value='0.5*x^2';
 		int_start.value='-5';
 		int_end.value='5';
-		npoint.value='5000';
+		npoint.value='1000';
 		b_start.value='12.5';
 		b_end.value='12.5';
 		E_start.value='0';

@@ -26,14 +26,6 @@ body {
     vertical-align: top;
 }
 
-#left_col_content {
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-bottom: 0.5em;
-    padding-top: 0.5em;
-    color: white;
-}
-
 #logo {
     padding: 0.5em;
     font-family: sans-serif;
@@ -44,30 +36,78 @@ body {
     font-weight: bold;
 }
 
+#left_col_content {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+    color: white;
+}
+
+#element {
+	padding: 0.5em;
+	text-align: left;
+}
+
 #right_col {
     vertical-align: top;
 }
 
 #right_col_content {
-    padding: 0.5em;
+    padding: 1em;
 	visibility: hidden;
 }
 
-#bottom_bar {
+#wrap2 {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0; 
+}
+
+#graphs {
+	width: 39em;
+	height: 100%;
+	text-align: center;
+	padding: 0.5em;
+	padding-right: 2em;
+	padding-left: 0em;
+}
+
+#graphup {
+	height: 17em;
+}
+
+#graphdown {
+	height: 17em;
+}
+
+#right_bar {
+    width: 16em;
+	height: 100%;
+	text-align: center;
+    background: #50B0D0;
+    border: 0.15em solid #33A1C9;
+    vertical-align: top;
+    padding: 0;
+}
+
+#right_bar_content {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+    color: white;
+}
+
+/*#bottom_bar {			/*not used with right_bar* /
     padding: 0.5em;
     font-family: sans-serif;
     background: #50B0D0;
     border: 0.15em solid #33A1C9;
     color: white;
-}
-
-#right_bar {
-    padding: 0.5em;
-    font-family: sans-serif;
-    background: #50B0D0;
-    /*border: 0.15em solid #33A1C9;*/
-    color: white;
-}
+}*/
 
 input[type=text] {
     padding: 0.25em;
@@ -86,17 +126,6 @@ input[type=button], input[type=reset] {
 	border-radius: 0.25em;
 	box-shadow: 0 0.2em 0 #33A1C9;
 }
-.pair {
-	width: 50%;
-}
-.graph_pair {
-	width: 50%;
-	text-align: center;
-}
-
-.bottom {
-	width: 33%;
-}
 
 input[type=number] {
 	background: white;
@@ -111,6 +140,18 @@ input[type=number] {
 	font-size: 100%;
 	border-radius: 0.25em;
 }
+
+#pair {
+	width: 50%;
+}
+/*.graph_pair {			/*not used with right_bar* /
+	width: 50%;
+	text-align: center;
+}*/
+
+/*.bottom {			/*not used with right_bar* /
+	width: 33%;
+}*/
 
 #wait_popup {
 	position: fixed;
@@ -139,36 +180,14 @@ input[type=number] {
 	vertical-align: middle;
 }
 
-/*#table {
+table {
 	width: 100%;
-}*/
+}
 
 #probdiv {
 	padding-left:1.2em
 }
 
-.graphs {
-	width: 70%;
-	height: 100%;
-	text-align: center;
-	padding: 0.5em
-}
-
-.legend {
-    width: 16em;
-	height: 100%;
-	text-align: center;
-	padding: 0.5em;
-    background: #50B0D0;
-    border: 0.15em solid #33A1C9;
-}
-graphup {
-	padding: 1em;
-}
 #numberdiv {
 	padding-left:1.7em
-}
-#element {
-	padding-top: 0.5em;
-	padding-bottom: 0.5em;
 }

@@ -29,13 +29,13 @@
                 
                 <div id="element">
 					Dominio:<br />                
-					<table id="table">
+					<table>
 						<tr>
-							<td class="pair">
+							<td id="pair">
 								Inizio
 								<input type="number" id="int_start" step="any" value="-1" /></td>
 							</td>
-							<td class="pair">
+							<td id="pair">
 								Fine
 								<input type="number" id="int_end" step="any" value="1" /></td>
 							</td>
@@ -47,13 +47,13 @@
                 
                 <div id="element">
 					Condizioni al contorno:
-					<table id="table">
+					<table>
 						<tr>
-							<td class="pair">
+							<td id="pair">
 								Inizio
 								<input type="number" id="b_start" step="any" value="1"/>
 							</td>
-							<td class="pair">
+							<td id="pair">
 								Fine
 								<input type="number" id="b_end" step="any" value="2" />
 							</td>
@@ -64,14 +64,16 @@
                 <div id="element">
 					Autovalori:<br />
 					<form>
-					<input type="radio" name="eigenvalue" value="interval" checked onclick="E_number.setAttribute('disabled', 'disabled');E_start.removeAttribute('disabled');E_end.removeAttribute('disabled');">intervallo di energia
-					<table id="table">
+					<input type="radio" name="eigenvalue" value="interval" checked />
+					<!--onclick="E_number.setAttribute('disabled', 'disabled');E_start.removeAttribute('disabled');E_end.removeAttribute('disabled');"/>-->
+					intervallo di energia
+					<table>
 						<tr>
-							<td class="pair">
+							<td id="pair">
 								da
 								<input type="number" id="E_start" step="any" value="0" /></td>
 							</td>
-							<td class="pair">
+							<td id="pair">
 								a
 								<input type="number" id="E_end" step="any" value="10" /></td>
 							</td>
@@ -83,11 +85,12 @@
 							</td>
 						</tr>
 					</table>
+					<!--					NUMERO DI AUTOVALORI - ATTUALMENTE DISABILITATO E NASCOSTO
 					<input type="radio" name="eigenvalue" value="number" disabled="disabled" onclick="E_number.removeAttribute('disabled');E_start.setAttribute('disabled', 'disabled');E_end.setAttribute('disabled', 'disabled');">numero
-					<!--<br />-->
-					<div id="numberdiv">
+					<!--<br />- ->
+					<div visibility="hidden" id="numberdiv">
 					<input type="number" title="at the moment not working" id="E_number" disabled="disabled">
-					</div>
+					</div>-->
 					</form>
 				</div>
                 
@@ -95,7 +98,7 @@
 					Costante di Planck:
 					<br />
 					<div class="styled-select">
-						<select id="planck">
+						<select id="planck" title="at the moment not working" >
 								<option value="1/(2*pi)" selected="selected">ħ=1</option>
 								<option value="1">h=1</option>
 								<option value="6.626269E-34">h=6.626269E-34 J s</option>
@@ -103,21 +106,14 @@
 						</select>
 					</div>
 				</div>
-                
+				
                 <div id="element">
-					<input type="checkbox" id="norm" onclick="norm_check();">&#09;Normalizza<br />
-					<div id="probdiv">
-						<input type="checkbox" id="prob" disabled="disabled">&#09;Mostra probabilità<br />
-					</div>
-				</div>
-
-                <div class="element">
-				<table id="table">
+				<table>
 					<tr>
-						<td class="pair">
+						<td id="pair">
 							<input type="button" id="solve" value="Risolvi" onclick="solve();"/>
 						</td>
-						<td class="pair">
+						<td id="pair">
 							<input type="reset" id="reset" value="Reset" onclick="examples(0)"/>
 						</td>
 					</tr>
@@ -145,33 +141,48 @@
         </td>
         <td id="right_col">
             <div id="right_col_content">
-			
-			<table id="table">
-				<tr>
-					<td class="graphs"><!--class="graph_pair">-->
-						densità di probabilità e potenziale<br /><br />
-						<div id="graphup" style="width:100%;"></div>
-						<br />
-						<!--potenziale<br /><br />-->
-						<div id="graphdown" style="width:100%;"></div>
-					</td>
-					<td class="legend"><!--class="graph_pair">-->
-						<div id="right_bar">
-							<div id="labelsSX"></div>
-							<br />
-							<input type="button" id="export" value="Esporta dati" onclick="alert([[1,2,3],[4,5,6],[7,8,9]].join('\n'));"/><!--"alert('dati in formato csv');"/>-->
-						</div>
-					</td>
-				</tr>
-            </table>
+				<table id="wrap2">
+					<tr>
+						<td id="graphs">
+							<div>densità di probabilità e potenziale</div>
+							<div id="element">
+								<div id="graphup"></div>
+							</div>
+							<div id="element">
+								<div id="graphdown"></div>
+							</div>
+						</td>
+					
+						<td id="right_bar">							
+							<div id="logo">Proprietà</div>
+							<div id="right_bar_content">
+								<div id="element">
+									<input type="checkbox" id="norm" onclick="norm_check();" title="at the moment not working" />&#09;Normalizza<br />
+									<div id="probdiv">
+										<input type="checkbox" id="prob" disabled="disabled" title="at the moment not working"  />&#09;Mostra probabilità<br />
+									</div>
+								</div>
+							</div>
+							<div id="logo">Legenda</div>
+							<div id="right_bar_content">
+								<div id="element">
+									<div id="labelsSX"></div>
+								</div>
+								<div id="element">
+									<input type="button" id="export" value="Esporta dati" onclick="alert([[1,2,3],[4,5,6],[7,8,9]].join('\n'));"/><!--"alert('dati in formato csv');"/>-->
+								</div>
+							</div>
+						</td>
+					</tr>
+				</table>
             
             <!--
             <div id="bottom_bar">
-                <table id="table">
+                <table>
 					<tr>
-						<td class="pair"><!--<td class="bottom">- ->
+						<td id="pair"><!--<td class="bottom">- ->
 							<div id="labelsSX"></div>
-						<td class="pair"><!--<td class="bottom">- ->
+						<td id="pair"><!--<td class="bottom">- ->
 							<div id="labelsDX"></div>
 						<!--
 						<td class="bottom">
