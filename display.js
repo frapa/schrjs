@@ -16,6 +16,15 @@ function transpose(D, ef) {
     return tr_array;
 }
 
+function create_labels(evalue) {
+	var labels = ["x", "autovalore 0"]
+	for (var i = 1; i < evalue.length; i++) {
+        labels.push("autovalore ");
+        labels[i+1] += i;
+	}
+	return labels
+}
+
 /*function array2csv(D, ef) {
     var csv = "";
     
@@ -60,38 +69,110 @@ function create_V_data(D,V) {
 
 //dominio, potential, eigenvalues, eigenfunction, computation time
 function display(D, V, ev, ef, t=0) {
-    console.log(transpose(D, ef));
+	var time = document.getElementById("time");
+	var to_time = "tempo di elaborazione: ";
+	to_time += t;
+	to_time += "ms";
+	time.innerHTML= to_time;
+	
+    console.log(D.as_array()[1]);
+    //console.log(create_labels(ev));
+	var xpos = document.getElementById("xpos");
+    var auto = document.getElementById("auto");
+    var ypos = document.getElementById("ypos");
+	var eigval = [];
+	for (var i = 0; i < ev.length; i++) {
+		eigval[i] = Math.round(ev[i] * 1000000) / 1000000;
+	};
+
     g = new Dygraph(
 	    document.getElementById("graphup"),
 	    transpose(D.as_array(), ef),
-		{
-		    legend: 'always',
-		    labelsDiv: document.getElementById('labelsSX'),
+		{   
+			title: 'densità di probabilità e',
+		    legend: 'never',
+		    //labelsDiv: document.getElementById('labelsUP'),
 		    labelsSeparateLines: true,
-		    //labels: ["X", "Y1", "Y2"]										//usare l'array ev possibilmente in seguito
+		    labels: create_labels(ev),
+			xlabel: "X",
+			ylabel: "densità di probabilità",
+			
+			highlightCallback: function(e, x, pts) {
+				var xvar = "x : ";
+				
+				xvar += Math.round(x * 1000) / 1000;
+				xpos.innerHTML = xvar;
+				
+				var auto = "\n";
+				var pts_short = [];
+				
+				for (var i = 0; i < ev.length; i++) {
+					pts_short[i] = Math.round(pts[i].yval * 100) / 100;
+				};
+				for (var i = 0; i < ev.length; i++) {
+					auto += pts_short[i];
+					auto += "<br />";
+				}
+				ypos.innerHTML = auto
+            },
+            unhighlightCallback: function(e) {
+				xpos.innerHTML = "<br />";
+				ypos.innerHTML = "";
+			}
 		}
 	);
     
-    f = new Dygraph(
+    pot = new Dygraph(
 		document.getElementById("graphdown"),
 		transpose(D.as_array(), [V]),
 		{
-		legend: 'always',
-		labelsDiv: document.getElementById('labelsDX'),
-		labelsSeparateLines: true,
-		labels: ["X", "potenziale"]
+			title: 'densità di probabilità e potenziale',
+			legend: 'always',
+			labelsDiv: document.getElementById('labelsDW'),
+			labelsSeparateLines: true,
+			labelsShowZeroValues: false,
+			labels: ["X", "potenziale"],
+			xlabel: "X",
+			ylabel: "potenziale",
 		}
-		);
-		
-	/*pot = new Dygraph(
-		document.getElementById("potential"),
-		create_data(D,V),
-		{
-		legend: 'always',
-		labelsDiv: document.getElementById('labelsSX'),
-		labelsSeparateLines: true
+	);
+	
+	colors = g.getColors();
+	var ev_text = "\n";
+	for (var i = 0; i < ev.length; i++) {
+		ev_text += "<font color='";
+		ev_text += colors[i];
+		ev_text += "'>E<sub>";						// define custom colors
+		ev_text += i;
+		ev_text += "</sub>= ";
+		ev_text += eigval[i];
+		ev_text += ":</font><br />";
 		}
-		);*/
+	auto.innerHTML = ev_text;
+	//pot_color = pot.getColors();
+	
+	
+	//------ex function data export------//
+	var data = document.getElementById("data_popup");
+	
+	var to_data = "<table>";
+	for (var i = 0; i < (D.as_array()); i++) {
+			to_data += "<tr>";
+			to_data += "<td>";
+			to_data += D.as_array()[i];
+			to_data += "</td>";
+			for (var j = 0; j < (ev.length+1); j++) {
+				to_data += "<td>";
+				to_data += ev[i][j];
+				console.log(ev[i][j]);
+				to_data += "</td>";
+			};
+			to_data += "</tr>";
+	};
+	to_data += "</table>";
+	to_data += "<input type='reset' id='hide' value='Nascondi dati' onclick='hide_popup('data_popup');show_popup('graphup');show_popup('graphdown');'/></div>";	
+	data.innerHTML = to_data;
+	//-----------------------------------//
 }
 
 function show_popup(name) {
@@ -194,3 +275,25 @@ function examples(i) {
 		//planck.defaultSelected;
 	}
 }
+
+/*function data_export(D, V, ev, ef, t=0) {
+	var data = document.getElementById("data_popup");
+	
+	var to_data = "<table>";
+	for (var i = 0; i < (D.as_array()); i++) {
+			to_data += "<tr>";
+			to_data += "<td>";
+			to_data += D.as_array()[i];
+			to_data += "</td>";
+			for (var j = 0; j < (ev.length+1); j++) {
+				to_data += "<td>";
+				to_data += ev[i][j];
+				to_data += "</td>";
+			};
+			to_data += "</tr>";
+	};
+	to_data += "</table>";
+	to_data += "<input type='reset' id='hide' value='Nascondi dati' onclick='hide_popup('data_popup');show_popup('graphup');show_popup('graphdown');'/></div>";	
+	data.innerHTML = to_data;
+}
+*/

@@ -98,7 +98,7 @@
 					Costante di Planck:
 					<br />
 					<div class="styled-select">
-						<select id="planck" title="at the moment not working" >
+						<select id="planck" title="at the moment not working" disabled>
 								<option value="1/(2*pi)" selected="selected">ħ=1</option>
 								<option value="1">h=1</option>
 								<option value="6.626269E-34">h=6.626269E-34 J s</option>
@@ -144,12 +144,14 @@
 				<table id="wrap2">
 					<tr>
 						<td id="graphs">
-							<div>densità di probabilità e potenziale</div>
 							<div id="element">
 								<div id="graphup"></div>
 							</div>
 							<div id="element">
 								<div id="graphdown"></div>
+							</div>
+							<div id="data_popup">
+								<!--<input type="reset" id="hide" value="Nascondi dati" onclick="hide_popup('data_popup');show_popup('graphup');show_popup('graphdown');"/></div>-->
 							</div>
 						</td>
 					
@@ -157,7 +159,10 @@
 							<div id="logo">Proprietà</div>
 							<div id="right_bar_content">
 								<div id="element">
-									<input type="checkbox" id="norm" onclick="norm_check();" title="at the moment not working" />&#09;Normalizza<br />
+									<div id="time">tempo di elaborazione:</div>
+								</div>
+								<div id="element">
+									<input type="checkbox" id="norm" onclick="norm_check();" title="at the moment not working" disabled/>&#09;Normalizza<br />
 									<div id="probdiv">
 										<input type="checkbox" id="prob" disabled="disabled" title="at the moment not working"  />&#09;Mostra probabilità<br />
 									</div>
@@ -166,10 +171,25 @@
 							<div id="logo">Legenda</div>
 							<div id="right_bar_content">
 								<div id="element">
-									<div id="labelsSX"></div>
+									Asse x:<br />
+									<div id="xpos">x =</div>
 								</div>
 								<div id="element">
-									<input type="button" id="export" value="Esporta dati" onclick="alert([[1,2,3],[4,5,6],[7,8,9]].join('\n'));"/><!--"alert('dati in formato csv');"/>-->
+									Autovalori:<br />
+									<table>
+										<tr>
+											<td>
+												<div id="auto"></div>
+											</td>
+											<td id="yaxis">
+												<div id="ypos"></div>
+											</td>
+										</tr>
+									</table>
+									<div id="labelsUP"></div>
+								</div>
+								<div id="element">
+									<input type="button" id="export" value="Esporta dati" onclick="hide_popup('graphup');hide_popup('graphdown');show_popup('data_popup');"/><!--"alert([[1,2,3],[4,5,6],[7,8,9]].join('\n'));"/><!--"alert('dati in formato csv');"/>-->
 								</div>
 							</div>
 						</td>
@@ -209,7 +229,6 @@
 						<br /> prego aspettare
 						<br /> <br />
 						<input type="reset" id="hide" value="Nascondi" onclick="hide_popup('wait_popup');"/></div>
-    <div id="data_popup">
-						<input type="reset" id="hide" value="Nascondi" onclick="hide_popup(data_popup);"/></div>
+	</div>
   </body>
 </html>

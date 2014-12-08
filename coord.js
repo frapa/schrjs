@@ -42,6 +42,7 @@ function solve() {
 				hide_popup("wait_popup");
 				show_popup('right_col_content');
                 display(D, V, data.ev, data.ef, data.t);
+                //data_export(D, V, data.ev, data.ef, data.t);
                 break;
         };
     }, false);
