@@ -71,53 +71,44 @@ function create_V_data(D,V) {
 function display(D, V, ev, ef, t=0) {
 	var time = document.getElementById("time");
     var E_precision = document.getElementById("E_precision");
-	var to_time = "tempo di elaborazione: ";
-	to_time += t;
-	to_time += "ms";
+	var to_time = "Tempo di elaborazione: " + t + "ms";
 	time.innerHTML= to_time;
-	
-    console.log(D.as_array()[1]);
+	    
     //console.log(create_labels(ev));
 	var xpos = document.getElementById("xpos");
-    var auto = document.getElementById("auto");
-    var ypos = document.getElementById("ypos");
 	var eigval = [];
 	for (var i = 0; i < ev.length; i++) {
 		eigval[i] = ev[i].toFixed(-Math.floor(Math.log10(E_precision.value)) - 1);
-		console.log(eigval[i]);
 	};
 
     g = new Dygraph(
 	    document.getElementById("graphup"),
 	    transpose(D.as_array(), ef),
 		{   
-			title: 'densità di probabilità e',
+			title: 'Densità di probabilità',
 		    legend: 'never',
 		    //labelsDiv: document.getElementById('labelsUP'),
 		    labelsSeparateLines: true,
 		    labels: create_labels(ev),
 			xlabel: "X",
 			ylabel: "densità di probabilità",
+			labelsKMB: true,
 			
 			highlightCallback: function(e, x, pts) {
 				var xvar = "x : " + x.toFixed(4);
 				xpos.innerHTML = xvar;
 				
-				var auto = "\n";
-				var pts_short = [];
-				
 				for (var i = 0; i < ev.length; i++) {
-					pts_short[i] = pts[i].yval.toFixed(2);
+					var ypos = document.getElementById("coord" + i);
+					ypos.innerHTML = pts[i].yval.toPrecision(4);
 				};
-				for (var i = 0; i < ev.length; i++) {
-					auto += pts_short[i];
-					auto += "<br />";
-				}
-				ypos.innerHTML = auto
             },
             unhighlightCallback: function(e) {
 				xpos.innerHTML = "<br />";
-				ypos.innerHTML = "";
+				for (var i = 0; i < ev.length; i++) {
+					var ypos = document.getElementById("coord" + i);
+					ypos.innerHTML = "";
+				};
 			}
 		}
 	);
@@ -126,7 +117,7 @@ function display(D, V, ev, ef, t=0) {
 		document.getElementById("graphdown"),
 		transpose(D.as_array(), [V]),
 		{
-			title: 'densità di probabilità e potenziale',
+			title: 'Potenziale',
 			legend: 'always',
 			labelsDiv: document.getElementById('labelsDW'),
 			labelsSeparateLines: true,
@@ -143,42 +134,55 @@ function display(D, V, ev, ef, t=0) {
 	
 	for (var i = 0; i < ev.length; i++) {
 		var tr = document.createElement("tr");
+		var td_name = document.createElement("td");
 		var td_eigen = document.createElement("td");
 		var td_coord = document.createElement("td");
 		td_coord.id = "coord" + i;
 		
-		td_eigen.style.background = colors[i];
+		td_name.style.color = colors[i];
+		td_name.style.color = colors[i];
+		td_name.style.width = "2.5em";
+		//td_name.style.position = "fixed";
+		td_name.innerHTML = "-E<sub>" + i + "</sub>:";
+		
+		//td_eigen.style.background = colors[i];
+		td_eigen.style.width = (E_precision.value+1) + "em";
 		td_eigen.innerHTML = eigval[i];
 		
+		td_coord.align = "right";//text-align = "right";
+		
+		tr.appendChild(td_name);
 		tr.appendChild(td_eigen);
 		tr.appendChild(td_coord);
 		evtab.appendChild(tr);
-	}
-	auto.innerHTML = ev_text;
-	//pot_color = pot.getColors();
-	
+	}	
 	
 	//------ex function data export------//
-	var data = document.getElementById("data_popup");
+	var data = document.getElementById("data_table");
+	var to_data = "X,	V,	";
+	for (var i = 0; i < ev.length; i++) {
+		to_data += "E"+i+",	";
+	}
+	to_data += "\n"
 	
-	var to_data = "<table>";
-	for (var i = 0; i < (D.as_array()); i++) {
-			to_data += "<tr>";
-			to_data += "<td>";
-			to_data += D.as_array()[i];
-			to_data += "</td>";
-			for (var j = 0; j < (ev.length+1); j++) {
-				to_data += "<td>";
-				to_data += ev[i][j];
-				console.log(ev[i][j]);
-				to_data += "</td>";
-			};
-			to_data += "</tr>";
+	for (var i = 0; i < (D.as_array().length); i++) {
+		//var tr = document.createElement("tr");
+		//var td_xcoord = document.createElement("td");
+		to_data += D.as_array()[i]+",	"
+		//tr.appendChild(td_xcoord);
+		for (var j = 0; j < (ev.length); j++) {
+			//var td_eigfun = document.createElement("td");
+			to_data += ef[j][i]+",	";
+			//tr.appendChild(td_eigfun);
+		};
+		to_data += "\n"
+		//data_table.appendChild(tr);
 	};
-	to_data += "</table>";
-	to_data += "<input type='reset' id='hide' value='Nascondi dati' onclick='hide_popup('data_popup');show_popup('graphup');show_popup('graphdown');'/></div>";	
+	//to_data += "<input type='reset' id='hide' value='Nascondi dati' onclick='hide_popup('data_popup');show_popup('graphup');show_popup('graphdown');'/></div>";	
 	data.innerHTML = to_data;
 	//-----------------------------------//
+	var export_button = document.getElementById("export");
+	export_button.onclick="alert("+transpose(D.as_array(), ef)+".join('\n'));"
 }
 
 function show_popup(name) {
@@ -225,9 +229,9 @@ function examples(i) {
 		b_end.value='2';
 		E_start.value='0';
 		E_end.value='10';
-		dE.value='1';
+		dE.value='0.001';
 		E_precision.value='0.0001';
-		E_number.value='';
+		E_number.value='0.001';
 		//planck.defaultSelected;
 	}
 	if (i == 1) {
@@ -239,8 +243,9 @@ function examples(i) {
 		b_end.value='0';
 		E_start.value='0';
 		E_end.value='10';
-		E_number.value='';
-		dE.value='';
+		dE.value='0.001';
+		E_precision.value='0.0001';
+		E_number.value='0.001';
 		//planck.defaultSelected;
 	}
 	if (i == 2) {
@@ -252,8 +257,9 @@ function examples(i) {
 		b_end.value='2.25';
 		E_start.value='0';
 		E_end.value='10';
-		E_number.value='';
-		dE.value='';
+		dE.value='0.001';
+		E_precision.value='0.0001';
+		E_number.value='0.001';
 		//planck.defaultSelected;
 	}
 	if (i == 3) {
@@ -261,12 +267,13 @@ function examples(i) {
 		int_start.value='-3.5';
 		int_end.value='3.5';
 		npoint.value='1000';
-		b_start.value='3.5';
-		b_end.value='3.5';
+		b_start.value='0';
+		b_end.value='0';
 		E_start.value='0';
-		E_end.value='1000';
-		E_number.value='';
-		dE.value='';
+		E_end.value='10';
+		dE.value='0.001';
+		E_precision.value='0.0001';
+		E_number.value='0.001';
 		//planck.defaultSelected;
 	}
 	if (i == 4) {
@@ -278,8 +285,9 @@ function examples(i) {
 		b_end.value='0';
 		E_start.value='0';
 		E_end.value='10';
-		E_number.value='';
-		dE.value='';
+		dE.value='0.001';
+		E_precision.value='0.0001';
+		E_number.value='0.001';
 		//planck.defaultSelected;
 	}
 }
