@@ -184,7 +184,8 @@ input[type=number] {
 	position: fixed;
 	visibility: hidden;
 	left: 40%;
-	top: 40%;
+	top: 30%;
+	width: 20%;
     background: #6FBEDA;
 	padding: 1em;
 	text-align: center;
@@ -198,20 +199,26 @@ input[type=number] {
 	position: fixed;
 	visibility: hidden;
 	top: 1.1em;
-	width: 37em;
-    height: 90%;
+	width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
 	/*height: 38em;*/
     background: #6FBEDA;
 	border: 0.1em solid #63A1C9;
 	padding: 1em;
 	text-align: center;
 	vertical-align: middle;
+	z-index: 15;
+	border-radius: 0.2em;
+	border: 0.15em solid #33A1C9;
+	box-shadow: 0 0.1em 0.1em #555;
 }
 #data_table {
 	/*visibility: hidden;*/
 	width: 98%;
     max-width: 98%;
-	height: 80%;
+	height: 90%;
 	/*height: 54em; 
     max-height: 54em;*/
 }

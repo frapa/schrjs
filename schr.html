@@ -151,14 +151,6 @@
 				<table id="wrap2">
 					<tr>
 						<td id="graphs">
-							<div id="data_popup">
-								<textarea id="data_table">
-										<!-- TABELLA AUTOGENERATA DI DATI DA ESPORTARE-->
-								</textarea>
-								<div id="element">
-									<input type="reset" id="hide" value="Nascondi dati" onclick="console.log('pasagay');hide_popup('data_popup');show_popup('graphup');show_popup('graphdown');"/>
-								</div>
-							</div>
 							<div id="element">
 								<div id="graphup"></div>
 							</div>
@@ -195,10 +187,10 @@
 									<div id="labelsUP"></div>
 								</div>
 								<div id="element">
+									<!--<br/>
+									<input type="reset" id="hide" value="Nascondi dati" onclick="console.log('ma che cazz?');hide_popup('data_popup');show_popup('graphup');show_popup('graphdown');"/>-->
 									<br/>
-									<input type="reset" id="hide" value="Nascondi dati" onclick="console.log('ma che cazz?');hide_popup('data_popup');show_popup('graphup');show_popup('graphdown');"/>
-									<br/>
-									<input type="reset" id="export" value="Esporta dati" onclick="console.log('ma che cazz?');show_popup('data_popup');hide_popup('graphup');hide_popup('graphdown')"/>
+									<input type="button" id="export" onclick="alert('culo');" value="Esporta dati"/>
 								</div>
 							</div>
 						</td>
@@ -208,9 +200,10 @@
         </td>
       <tr>
     </table>
+    
     <div id="wait_popup">
-		<p>Sto computando le soluzioni dell'equazione prego aspettare</p>
-		<img src="wait.gif" style="border-radius: 0.2em;" />
+		<p style="margin: 0.25em;">Sto computando le soluzioni dell'equazione, prego aspettare...</p>
+		<img src="wait.gif" style="border-radius: 64px; margin: 0.5em;" />
 		<br />
 		<table>
 			<tr>
@@ -223,5 +216,13 @@
 			</tr>
 		</table>
 	</div>
+	<div id="data_popup">
+								<textarea id="data_table">
+										<!-- TABELLA AUTOGENERATA DI DATI DA ESPORTARE-->
+								</textarea>
+								<div id="element">
+									<input type="reset" id="hide" value="Nascondi dati" onclick="hide_popup('data_popup');"/>
+								</div>
+							</div>
   </body>
 </html>
