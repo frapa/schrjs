@@ -60,6 +60,7 @@ table {
 #right_col_content {
     padding: 1em;
 	visibility: hidden;
+    height: 100%;
 }
 
 #wrap2 {
@@ -80,11 +81,13 @@ table {
 }
 
 #graphup {
-	height: 18.5em;
+    height: 50%;
+	/*height: 18.5em;*/
 }
 
 #graphdown {
-	height: 18.5em;
+    height: 50%;
+	/*height: 18.5em;*/
 }
 
 #right_bar {
@@ -176,14 +179,6 @@ input[type=number] {
 #pair {
 	width: 50%;
 }
-/*.graph_pair {			/*not used with right_bar* /
-	width: 50%;
-	text-align: center;
-}*/
-
-/*.bottom {			/*not used with right_bar* /
-	width: 33%;
-}*/
 
 #wait_popup {
 	position: fixed;
@@ -204,7 +199,8 @@ input[type=number] {
 	visibility: hidden;
 	top: 1.1em;
 	width: 37em;
-	height: 38em;
+    height: 90%;
+	/*height: 38em;*/
     background: #6FBEDA;
 	border: 0.1em solid #63A1C9;
 	padding: 1em;
@@ -214,9 +210,10 @@ input[type=number] {
 #data_table {
 	/*visibility: hidden;*/
 	width: 98%;
-	height: 54em;
-    max-width: 98%; 
-    max-height: 54em;
+    max-width: 98%;
+	height: 80%;
+	/*height: 54em; 
+    max-height: 54em;*/
 }
 
 table {
