@@ -81,8 +81,15 @@
 						<tr>
 							<td>
 								dE:
-								<input type="number" id="dE" step="any" value="250" /><br />
+								<input type="number" id="dE" step="any" value="1" /><br />
 							</td>
+						</tr>
+						<tr>
+							<td>
+								precisione:<br />
+								<input type="number" id="E_precision" step="any" value="0.0001" /><br />
+							</td>
+							
 						</tr>
 					</table>
 					<!--					NUMERO DI AUTOVALORI - ATTUALMENTE DISABILITATO E NASCOSTO
@@ -176,15 +183,15 @@
 								</div>
 								<div id="element">
 									Autovalori:<br />
-									<table>
-										<tr>
+									<table id="evtab">
+										<!--<tr>
 											<td>
 												<div id="auto"></div>
 											</td>
 											<td id="yaxis">
 												<div id="ypos"></div>
 											</td>
-										</tr>
+										</tr>-->
 									</table>
 									<div id="labelsUP"></div>
 								</div>
@@ -195,31 +202,6 @@
 						</td>
 					</tr>
 				</table>
-            
-            <!--
-            <div id="bottom_bar">
-                <table>
-					<tr>
-						<td id="pair"><!--<td class="bottom">- ->
-							<div id="labelsSX"></div>
-						<td id="pair"><!--<td class="bottom">- ->
-							<div id="labelsDX"></div>
-						<!--
-						<td class="bottom">
-							<input type="checkbox" id="norm" onclick="check();">&#09;Normalizza<br />
-							<div id="probdiv">
-							<input type="checkbox" id="prob" disabled="disabled">&#09;Mostra probabilità<br />
-							</div>
-							<br />
-							<input type="button" id="export" value="Esporta dati" onclick="alert('dati in formato csv');"/>
-						- ->
-					</tr>
-                </table>
-				<br />
-				<input type="button" id="export" value="Esporta dati" onclick="alert('dati in formato csv');"/>
-			</div>
-            -->
-            
             </div>
         </td>
       <tr>

@@ -80,6 +80,7 @@ function solve_numerov(D, V, boundary_start, boundary_end, m, h, dE, E_min, E_ma
         var psi = numerov_integrate(D, D.step, a, boundary_start, boundary_start+1.0);
         var new_wf_err = psi[psi.length - 1] - boundary_end;
 
+        var E_ = E;
         if (!(wf_err === null) && (wf_err*new_wf_err < 0)) {
             // We found a energy eigenvalue!
             // Now, using the shooting method (bisection), we get the wave
@@ -87,37 +88,37 @@ function solve_numerov(D, V, boundary_start, boundary_end, m, h, dE, E_min, E_ma
             
             // E_err instead of wf_err to avoid confusion with outer loop. This time the error is
             // on the energy eigenvalue.
-            var E_err = E - last_E;
+            var E_err = E_ - last_E;
             
             // Moreover we use another variable wf_error instead of wf_err to avoid confusion
             // with the outer loop.
             var wf_error = new_wf_err;
             
             var E1 = last_E;
-            var E2 = E;
+            var E2 = E_;
             while (Math.abs(E_err) > precision) {
-                E = (E2 + E1) / 2.0;
-
+                E_ = (E2 + E1) / 2.0;
+                
                 var a = new Array(D.length);
                 for (var i = 0; i < D.length; i++) {
-                    a[i] = 2.0*m*(V[i] - E) / Math.pow(h, 2);
+                    a[i] = 2.0*m*(V[i] - E_) / Math.pow(h, 2);
                 }
 
                 psi = numerov_integrate(D, D.step, a, boundary_start, boundary_start+1.0);
-                var new_wf_error = psi[-1] - boundary_end;
+                var new_wf_error = psi[psi.length - 1] - boundary_end;
 
                 if (wf_error*new_wf_error < 0) {
                     E1 = E2;
-                    E2 = E;
-                }else {
-                    E2 = E;
+                    E2 = E_;
+                } else {
+                    E2 = E_;
                 }
 
                 wf_error = new_wf_error;
                 E_err = E2 - E1;
             }
 
-            eigenvalues.push(E);
+            eigenvalues.push(E_);
             eigenfunctions.push(psi);
         }
         
@@ -152,13 +153,12 @@ function solve_numerov(D, V, boundary_start, boundary_end, m, h, dE, E_min, E_ma
     if callback is not None:
         callback(1.0)*/
     
-    console.log(eigenvalues);
     return [eigenvalues, eigenfunctions];
 }
 
 function manage(data) {
     var date1 = new Date();
-    results = solve_numerov(data.D, data.V, data.bs, data.be, E_min=data.Es, E_max=data.Ee);
+    results = solve_numerov(data.D, data.V, data.bs, data.be, undefined, undefined, data.dE, data.Es, data.Ee, undefined, data.precision);
     var date2 = new Date();
     var t = date2 - date1;
     
