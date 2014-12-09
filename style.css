@@ -130,11 +130,24 @@ input[type=text] {
 
 input[type=button], input[type=reset] {
 	display: block;
-	background: white;
+	background: #33A1C9;
+	color: white;
 	border: 0;/*0.15em solid #33A1C9;*/
 	font-size: large;
 	border-radius: 0.25em;
-	box-shadow: 0 0.2em 0 #33A1C9;
+	box-shadow: 0 0.2em 0 #1381A9;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+	padding: 0.35em 1em;
+	cursor: pointer;
+}
+
+input[type=button]:hover, input[type=reset]:hover {
+	background: #50B0D0;
+}
+
+input[type=button]:active, input[type=reset]:active {
+	background: #50B0D0;
+	box-shadow: 0 0.1em 0 #1381A9;
 }
 
 input[type=number] {
@@ -177,12 +190,13 @@ input[type=number] {
 	visibility: hidden;
 	left: 40%;
 	top: 40%;
-	width: 20%;
-	height: 20%;
     background: #6FBEDA;
 	padding: 1em;
 	text-align: center;
 	vertical-align: middle;
+	border-radius: 0.2em;
+	border: 0.15em solid #33A1C9;
+	box-shadow: 0 0.1em 0.1em #555;
 }
 
 #data_popup {
