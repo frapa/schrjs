@@ -70,6 +70,7 @@ function create_V_data(D,V) {
 //dominio, potential, eigenvalues, eigenfunction, computation time
 function display(D, V, ev, ef, t=0) {
 	var time = document.getElementById("time");
+    var E_precision = document.getElementById("E_precision");
 	var to_time = "tempo di elaborazione: ";
 	to_time += t;
 	to_time += "ms";
@@ -82,7 +83,8 @@ function display(D, V, ev, ef, t=0) {
     var ypos = document.getElementById("ypos");
 	var eigval = [];
 	for (var i = 0; i < ev.length; i++) {
-		eigval[i] = Math.round(ev[i] * 1000000) / 1000000;
+		eigval[i] = ev[i].toFixed(-Math.floor(Math.log10(E_precision.value)) - 1);
+		console.log(eigval[i]);
 	};
 
     g = new Dygraph(
@@ -98,16 +100,14 @@ function display(D, V, ev, ef, t=0) {
 			ylabel: "densità di probabilità",
 			
 			highlightCallback: function(e, x, pts) {
-				var xvar = "x : ";
-				
-				xvar += Math.round(x * 1000) / 1000;
+				var xvar = "x : " + x.toFixed(4);
 				xpos.innerHTML = xvar;
 				
 				var auto = "\n";
 				var pts_short = [];
 				
 				for (var i = 0; i < ev.length; i++) {
-					pts_short[i] = Math.round(pts[i].yval * 100) / 100;
+					pts_short[i] = pts[i].yval.toFixed(2);
 				};
 				for (var i = 0; i < ev.length; i++) {
 					auto += pts_short[i];
@@ -138,16 +138,22 @@ function display(D, V, ev, ef, t=0) {
 	);
 	
 	colors = g.getColors();
-	var ev_text = "\n";
+	var evtab = document.getElementById("evtab");
+	evtab.innerHTML="";
+	
 	for (var i = 0; i < ev.length; i++) {
-		ev_text += "<font color='";
-		ev_text += colors[i];
-		ev_text += "'>E<sub>";						// define custom colors
-		ev_text += i;
-		ev_text += "</sub>= ";
-		ev_text += eigval[i];
-		ev_text += ":</font><br />";
-		}
+		var tr = document.createElement("tr");
+		var td_eigen = document.createElement("td");
+		var td_coord = document.createElement("td");
+		td_coord.id = "coord" + i;
+		
+		td_eigen.style.background = colors[i];
+		td_eigen.innerHTML = eigval[i];
+		
+		tr.appendChild(td_eigen);
+		tr.appendChild(td_coord);
+		evtab.appendChild(tr);
+	}
 	auto.innerHTML = ev_text;
 	//pot_color = pot.getColors();
 	
@@ -206,8 +212,9 @@ function examples(i) {
     var b_end = document.getElementById("b_end");
     var E_start = document.getElementById("E_start");
     var E_end = document.getElementById("E_end");
-    var E_number = document.getElementById("E_number");
     var dE = document.getElementById("dE");
+    var E_precision = document.getElementById("E_precision");
+    var E_number = document.getElementById("E_number");
     
 	if (i == 0) {
 		pot.value='0';
@@ -218,8 +225,9 @@ function examples(i) {
 		b_end.value='2';
 		E_start.value='0';
 		E_end.value='10';
+		dE.value='1';
+		E_precision.value='0.0001';
 		E_number.value='';
-		dE.value='';
 		//planck.defaultSelected;
 	}
 	if (i == 1) {
@@ -230,7 +238,7 @@ function examples(i) {
 		b_start.value='0';
 		b_end.value='0';
 		E_start.value='0';
-		E_end.value='1000';
+		E_end.value='10';
 		E_number.value='';
 		dE.value='';
 		//planck.defaultSelected;
@@ -243,7 +251,7 @@ function examples(i) {
 		b_start.value='2.25';
 		b_end.value='2.25';
 		E_start.value='0';
-		E_end.value='1000';
+		E_end.value='10';
 		E_number.value='';
 		dE.value='';
 		//planck.defaultSelected;
@@ -266,10 +274,10 @@ function examples(i) {
 		int_start.value='-5';
 		int_end.value='5';
 		npoint.value='1000';
-		b_start.value='12.5';
-		b_end.value='12.5';
+		b_start.value='0';
+		b_end.value='0';
 		E_start.value='0';
-		E_end.value='1000';
+		E_end.value='10';
 		E_number.value='';
 		dE.value='';
 		//planck.defaultSelected;

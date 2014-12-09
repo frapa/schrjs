@@ -10,6 +10,10 @@ body {
     height: 100%;
 }
 
+table {
+    border-collapse: collapse;
+}
+
 #wrap {
     margin: 0;
     height: 100%;
@@ -76,11 +80,11 @@ body {
 }
 
 #graphup {
-	height: 17em;
+	height: 18.5em;
 }
 
 #graphdown {
-	height: 17em;
+	height: 18.5em;
 }
 
 #right_bar {
@@ -136,6 +140,15 @@ input[type=button], input[type=reset] {
 input[type=number] {
 	background: white;
 	width: 4em;
+	border: 0.1em solid #33A1C9;
+	border-radius: 0.25em;
+}
+
+#E_precision {
+	background: white;
+	width: 8em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
 	border: 0.1em solid #33A1C9;
 	border-radius: 0.25em;
 }

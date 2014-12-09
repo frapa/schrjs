@@ -17,8 +17,12 @@ function solve() {
     
     var E_start_ele = document.getElementById("E_start");
     var E_end_ele = document.getElementById("E_end");
+    var dE_ele = document.getElementById("dE");
+    var precision_ele = document.getElementById("E_precision");
     var E_start = parseFloat(E_start_ele.value);
     var E_end = parseFloat(E_end_ele.value);
+    var dE = parseFloat(dE_ele.value);
+    var precision = parseFloat(precision_ele.value);
     
     // Domain
     var D = new Domain(int_start, int_end, npoint);
@@ -47,5 +51,5 @@ function solve() {
         };
     }, false);
     worker.postMessage({cmd: "start", D: D, V: V, bs: b_start, be: b_end,
-        Es: E_start, Ee: E_end});
+        Es: E_start, Ee: E_end, dE: dE, precision: precision});
 }
