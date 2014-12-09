@@ -190,12 +190,19 @@ input[type=number] {
 	visibility: hidden;
 	top: 1.1em;
 	width: 37em;
-	/*height: 35em;*/
+	height: 38em;
     background: #6FBEDA;
 	border: 0.1em solid #63A1C9;
 	padding: 1em;
 	text-align: center;
 	vertical-align: middle;
+}
+#data_table {
+	/*visibility: hidden;*/
+	width: 98%;
+	height: 54em;
+    max-width: 98%; 
+    max-height: 54em;
 }
 
 table {

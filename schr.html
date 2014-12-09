@@ -51,7 +51,7 @@
 						<tr>
 							<td id="pair">
 								Inizio
-								<input type="number" id="b_start" step="any" value="1"/>
+								<input type="number" id="b_start" step="any" value="1" size="150em"/>
 							</td>
 							<td id="pair">
 								Fine
@@ -92,16 +92,16 @@
 							
 						</tr>
 					</table>
-					<!--					NUMERO DI AUTOVALORI - ATTUALMENTE DISABILITATO E NASCOSTO
-					<input type="radio" name="eigenvalue" value="number" disabled="disabled" onclick="E_number.removeAttribute('disabled');E_start.setAttribute('disabled', 'disabled');E_end.setAttribute('disabled', 'disabled');">numero
-					<!--<br />- ->
-					<div visibility="hidden" id="numberdiv">
+					
+					<input hidden type="radio" name="eigenvalue" value="number" disabled="disabled" onclick="E_number.removeAttribute('disabled');E_start.setAttribute('disabled', 'disabled');E_end.setAttribute('disabled', 'disabled');"><!--numero
+					<!--<br />-->
+					<div hidden id="numberdiv">
 					<input type="number" title="at the moment not working" id="E_number" disabled="disabled">
-					</div>-->
+					</div>
 					</form>
 				</div>
                 
-                <div id="element">
+                <div id="element" hidden>
 					Costante di Planck:
 					<br />
 					<div class="styled-select">
@@ -151,14 +151,20 @@
 				<table id="wrap2">
 					<tr>
 						<td id="graphs">
+							<div id="data_popup">
+								<textarea id="data_table">
+										<!-- TABELLA AUTOGENERATA DI DATI DA ESPORTARE-->
+								</textarea>
+								<div id="element">
+									<input type="reset" id="hide" value="Nascondi dati" onclick="console.log('pasagay');hide_popup('data_popup');show_popup('graphup');show_popup('graphdown');"/>
+								</div>
+							</div>
 							<div id="element">
 								<div id="graphup"></div>
 							</div>
 							<div id="element">
 								<div id="graphdown"></div>
 							</div>
-							<div id="data_popup">
-								<!--<input type="reset" id="hide" value="Nascondi dati" onclick="hide_popup('data_popup');show_popup('graphup');show_popup('graphdown');"/></div>-->
 							</div>
 						</td>
 					
@@ -168,7 +174,7 @@
 								<div id="element">
 									<div id="time">tempo di elaborazione:</div>
 								</div>
-								<div id="element">
+								<div id="element" hidden>
 									<input type="checkbox" id="norm" onclick="norm_check();" title="at the moment not working" disabled/>&#09;Normalizza<br />
 									<div id="probdiv">
 										<input type="checkbox" id="prob" disabled="disabled" title="at the moment not working"  />&#09;Mostra probabilità<br />
@@ -179,24 +185,18 @@
 							<div id="right_bar_content">
 								<div id="element">
 									Asse x:<br />
-									<div id="xpos">x =</div>
+									<div id="xpos">x :</div>
 								</div>
 								<div id="element">
 									Autovalori:<br />
 									<table id="evtab">
-										<!--<tr>
-											<td>
-												<div id="auto"></div>
-											</td>
-											<td id="yaxis">
-												<div id="ypos"></div>
-											</td>
-										</tr>-->
+										<!-- TABELLA AUTOGENERATA DI LABEL-->
 									</table>
 									<div id="labelsUP"></div>
 								</div>
 								<div id="element">
-									<input type="button" id="export" value="Esporta dati" onclick="hide_popup('graphup');hide_popup('graphdown');show_popup('data_popup');"/><!--"alert([[1,2,3],[4,5,6],[7,8,9]].join('\n'));"/><!--"alert('dati in formato csv');"/>-->
+									<input type="reset" id="export" value="Esporta dati" onclick="console.log('pasagay');show_popup('data_popup');hide_popup('graphup');hide_popup('graphdown');"/><br/>
+									<input type="reset" id="hide" value="Nascondi dati" onclick="hide_popup('data_popup');show_popup('graphup');show_popup('graphdown');"/>
 								</div>
 							</div>
 						</td>
@@ -207,10 +207,19 @@
       <tr>
     </table>
     <div id="wait_popup">
-						<br />Sto computando le soluzioni dell'equazione
-						<br /> prego aspettare
-						<br /> <br />
-						<input type="reset" id="hide" value="Nascondi" onclick="hide_popup('wait_popup');"/></div>
+		<br />Sto computando le soluzioni dell'equazione
+		<br /> prego aspettare
+		<br /> <br />
+		<table>
+			<tr>
+				<td id="pair">
+					<input type="reset" id="hide" value="Nascondi" onclick="hide_popup('wait_popup');"/></div>
+				</td>
+				<td id="pair" align="right">
+					<input type="button" id="stop" value="Stop" onclick="stop_computation();"/></div>
+				</td>
+			</tr>
+		</table>
 	</div>
   </body>
 </html>
