@@ -157,7 +157,7 @@ function display(D, V, ev, ef, t=0) {
 		evtab.appendChild(tr);
 	}	
 	
-	//------ex function data export------//
+	//---------function data export---------//
 	var data = document.getElementById("data_table");
 	var to_data = "X,	V,	";
 	for (var i = 0; i < ev.length; i++) {
@@ -166,21 +166,14 @@ function display(D, V, ev, ef, t=0) {
 	to_data += "\n"
 	
 	for (var i = 0; i < (D.as_array().length); i++) {
-		//var tr = document.createElement("tr");
-		//var td_xcoord = document.createElement("td");
 		to_data += D.as_array()[i]+",	"
-		//tr.appendChild(td_xcoord);
 		for (var j = 0; j < (ev.length); j++) {
-			//var td_eigfun = document.createElement("td");
 			to_data += ef[j][i]+",	";
-			//tr.appendChild(td_eigfun);
 		};
 		to_data += "\n"
-		//data_table.appendChild(tr);
 	};
-	//to_data += "<input type='reset' id='hide' value='Nascondi dati' onclick='hide_popup('data_popup');show_popup('graphup');show_popup('graphdown');'/></div>";	
 	data.innerHTML = to_data;
-	//-----------------------------------//
+	//--------------------------------------//
 	var export_button = document.getElementById("export");
 	export_button.onclick="alert("+transpose(D.as_array(), ef)+".join('\n'));"
 }
@@ -291,25 +284,3 @@ function examples(i) {
 		//planck.defaultSelected;
 	}
 }
-
-/*function data_export(D, V, ev, ef, t=0) {
-	var data = document.getElementById("data_popup");
-	
-	var to_data = "<table>";
-	for (var i = 0; i < (D.as_array()); i++) {
-			to_data += "<tr>";
-			to_data += "<td>";
-			to_data += D.as_array()[i];
-			to_data += "</td>";
-			for (var j = 0; j < (ev.length+1); j++) {
-				to_data += "<td>";
-				to_data += ev[i][j];
-				to_data += "</td>";
-			};
-			to_data += "</tr>";
-	};
-	to_data += "</table>";
-	to_data += "<input type='reset' id='hide' value='Nascondi dati' onclick='hide_popup('data_popup');show_popup('graphup');show_popup('graphdown');'/></div>";	
-	data.innerHTML = to_data;
-}
-*/
