@@ -1,3 +1,5 @@
+var worker;
+
 function solve() {
     // Take inputs
     var pot_ele = document.getElementById("potential");
@@ -30,7 +32,7 @@ function solve() {
         V[i] = parser.evaluate({x: x});
     })
     
-    var worker = new Worker('schr.js');
+    worker = new Worker('schr.js');
     worker.addEventListener('message', function(e) {
         var data = e.data;
         switch (data.msg) {
@@ -48,4 +50,8 @@ function solve() {
     }, false);
     worker.postMessage({cmd: "start", D: D, V: V, bs: b_start, be: b_end,
         Es: E_start, Ee: E_end});
+}
+
+function stop_computation() {
+    worker.terminate();
 }

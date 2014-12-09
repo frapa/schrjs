@@ -3,7 +3,7 @@ var Domain = function (start, end, step_num) {
     this.end = end;
     this.step_num = step_num;
     this.length = this.step_num + 1;
-    this.step = (this.end - this.start) / this.step_num;
+    this.step = (this.end - this.start) / step_num;
 }
 
 Domain.prototype.get_value = function (n) {

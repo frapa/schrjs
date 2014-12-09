@@ -29,20 +29,26 @@ function numerov_integrate(domain, step, a, f0, f1) {
     
     step = domain.step;
     for (var i = 2; i < domain.length; i++) {
-        var phi_i1 = f[i-1] * (2.0 + 5.0 * step^2 * a[i-1] / 6.0);
-        var phi_i2 = f[i-2] * (1.0 - step^2 * a[i-2] / 12.0);
-        f[i] = (phi_i1 - phi_i2) / (1.0 - step^2 * a[i] / 12.0);
+        var phi_i1 = f[i-1] * (2.0 + 5.0 * Math.pow(step, 2) * a[i-1] / 6.0);
+        var phi_i2 = f[i-2] * (1.0 - Math.pow(step, 2) * a[i-2] / 12.0);
+        f[i] = (phi_i1 - phi_i2) / (1.0 - Math.pow(step, 2) * a[i] / 12.0);
     }
 
     return f
 }
 
-function solve_numerov(D, V, boundary_start, boundary_end, m=1.0, h=1.0,
-        dE=0.1, E_min=null, E_max=10.0, eigen_num=null,
-        precision=0.0001, normalized=true, callback=null) {
+function solve_numerov(D, V, boundary_start, boundary_end, m, h, dE, E_min, E_max, eigen_num,
+        precision, normalized, callback) {
+    
+    if (!m) { var m = 1; }
+    if (!h) { var h = 1; }
+    h = 1;
+    if (!dE) { var dE = 0.1; }
+    if (!precision) { var precision = 0.0001; }
+    if (!normalized) { var normalized = true; }
 
     // Find minimum of potential
-    if (E_min === null) {
+    if (E_min === undefined) {
         E_min = Math.min.apply(Math, V);
     } else {
         var Em = Math.min.apply(Math, V);
@@ -51,23 +57,28 @@ function solve_numerov(D, V, boundary_start, boundary_end, m=1.0, h=1.0,
         }
     }
     
-    if (eigen_num === null) {
+    if (!E_max) { E_max = E_min + 10.0; }
+    
+    /*if (eigen_num) {
         // safety margin so that the loop does not stop.
         E_max = 3*dE;
-    }
+    }*/
 
     var eigenvalues = new Array();
     var eigenfunctions = new Array();
     // Error on wave function. It is not significant since most times
     // we are not integrating with known boundary conditions.
     var wf_err = null;
-    var last_E = null;
-    for (var E = 0, n = 0; E > E_max; n++, E += dE) {
+    var last_E;
+    for (var E = E_min, n = 0; E < E_max; n++, E += dE) {
         // E in enumerate(energies):
-        var a = 2.0*m*(V - E) / h^2;
-
-        var psi = numerov_integration(D, a, boundary_start, boundary_start+1.0);
-        var new_wf_err = psi[-1] - boundary_end;
+        var a = new Array(D.length);
+        for (var i = 0; i < D.length; i++) {
+            a[i] = 2.0*m*(V[i] - E) / Math.pow(h, 2);
+        }
+        
+        var psi = numerov_integrate(D, D.step, a, boundary_start, boundary_start+1.0);
+        var new_wf_err = psi[psi.length - 1] - boundary_end;
 
         if (!(wf_err === null) && (wf_err*new_wf_err < 0)) {
             // We found a energy eigenvalue!
@@ -84,13 +95,15 @@ function solve_numerov(D, V, boundary_start, boundary_end, m=1.0, h=1.0,
             
             var E1 = last_E;
             var E2 = E;
-            while (abs(E_err) > precision) {
+            while (Math.abs(E_err) > precision) {
                 E = (E2 + E1) / 2.0;
 
-                a = 2.0*m*(V - E) / h^2;
+                var a = new Array(D.length);
+                for (var i = 0; i < D.length; i++) {
+                    a[i] = 2.0*m*(V[i] - E) / Math.pow(h, 2);
+                }
 
-                psi = numerov.numerov_integration(D, a,
-                    boundary_start, boundary_start+1.0);
+                psi = numerov_integrate(D, D.step, a, boundary_start, boundary_start+1.0);
                 var new_wf_error = psi[-1] - boundary_end;
 
                 if (wf_error*new_wf_error < 0) {
@@ -108,7 +121,7 @@ function solve_numerov(D, V, boundary_start, boundary_end, m=1.0, h=1.0,
             eigenfunctions.push(psi);
         }
         
-        /*if (!(callback === null)) {
+        /*if (!(callback === undefined)) {
             if isinstance(energies, numpy.ndarray):
                 fraction = float(n) / len(energies)
             else:
@@ -117,14 +130,14 @@ function solve_numerov(D, V, boundary_start, boundary_end, m=1.0, h=1.0,
             callback(fraction)
         }*/
         
-        if (!(eigen_num === null)) {
+        /*if (!eigen_num) {
             if (eigenvalues.length == eigen_num) {
                 break;
             } else {
                 // avoid that the loops stops
                 E_max += dE;
             }
-        }
+        }*/
 
         wf_err = new_wf_err;
         last_E = E;
@@ -138,7 +151,8 @@ function solve_numerov(D, V, boundary_start, boundary_end, m=1.0, h=1.0,
     
     if callback is not None:
         callback(1.0)*/
-
+    
+    console.log(eigenvalues);
     return [eigenvalues, eigenfunctions];
 }
 
@@ -153,7 +167,6 @@ function manage(data) {
     
     self.postMessage({'msg': 'finished', ev: ev, ef: ef, t:t});
     self.close();
-    display(data.D, data.V, ev, ef, t);
 }
 
 self.addEventListener('message', function(e) {
