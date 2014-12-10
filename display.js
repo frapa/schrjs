@@ -19,8 +19,8 @@ function transpose(D, ef) {
 function create_labels(evalue) {
 	var labels = ["x", "autovalore 0"]
 	for (var i = 1; i < evalue.length; i++) {
-        labels.push("autovalore ");
-        labels[i+1] += i;
+        labels.push("autovalore "+i);
+        //labels[i+1] += i;
 	}
 	return labels
 }
@@ -69,10 +69,9 @@ function create_V_data(D,V) {
 
 //dominio, potential, eigenvalues, eigenfunction, computation time
 function display(D, V, ev, ef, t=0) {
-	var time = document.getElementById("time");
+	document.getElementById("time").innerHTML = "Tempo di elaborazione: " + t + "ms";
+	
     var E_precision = document.getElementById("E_precision");
-	var to_time = "Tempo di elaborazione: " + t + "ms";
-	time.innerHTML= to_time;
 	    
     //console.log(create_labels(ev));
 	var xpos = document.getElementById("xpos");
@@ -87,8 +86,7 @@ function display(D, V, ev, ef, t=0) {
 		{   
 			title: 'Densità di probabilità',
 		    legend: 'never',
-		    //labelsDiv: document.getElementById('labelsUP'),
-		    labelsSeparateLines: true,
+		    //labelsDiv: document.getElementById('labelsUP'),		    labelsSeparateLines: true,
 		    labels: create_labels(ev),
 			xlabel: "X",
 			ylabel: "densità di probabilità",
@@ -112,6 +110,7 @@ function display(D, V, ev, ef, t=0) {
 			}
 		}
 	);
+	document.getElementById("graphup").style.visibility = "visible";
     
     pot = new Dygraph(
 		document.getElementById("graphdown"),
@@ -119,14 +118,15 @@ function display(D, V, ev, ef, t=0) {
 		{
 			title: 'Potenziale',
 			legend: 'always',
-			labelsDiv: document.getElementById('labelsDW'),
-			labelsSeparateLines: true,
+			//labelsDiv: document.getElementById('labelsDW'),			labelsSeparateLines: true,
 			labelsShowZeroValues: false,
 			labels: ["X", "potenziale"],
 			xlabel: "X",
 			ylabel: "potenziale",
+			labelsKMB: true,
 		}
 	);
+	document.getElementById("graphdown").style.visibility = "visible";
 	
 	colors = g.getColors();
 	var evtab = document.getElementById("evtab");
@@ -174,8 +174,6 @@ function display(D, V, ev, ef, t=0) {
 	};
 	data.innerHTML = to_data;
 	//--------------------------------------//
-	var export_button = document.getElementById("export_button");
-	export_button.onclick="alert("+transpose(D.as_array(), ef)+".join('\n'));"
 }
 
 function show_popup(name) {

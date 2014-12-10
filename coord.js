@@ -41,12 +41,16 @@ function solve() {
         var data = e.data;
         switch (data.msg) {
             case 'started':
+				hide_popup("right_col_content");
+				hide_popup("graphup");
+				hide_popup("graphdown");
 				show_popup("wait_popup");
-				hide_popup('right_col_content');
                 break;
             case 'finished':
 				hide_popup("wait_popup");
-				show_popup('right_col_content');
+				show_popup("right_col_content");
+				show_popup("graphup");
+				show_popup("graphdown");
                 display(D, V, data.ev, data.ef, data.t);
                 //data_export(D, V, data.ev, data.ef, data.t);
                 break;

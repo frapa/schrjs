@@ -173,7 +173,7 @@
 									</div>
 								</div>
 							</div>
-							<div id="logo">Legenda</div>
+							<div id="logo" style="border-top: 0.15em solid #33A1C9;">Legenda</div>
 							<div id="right_bar_content">
 								<div id="element">
 									Asse x:<br />
@@ -187,7 +187,7 @@
 									<div id="labelsUP"></div>
 								</div>
 								<div id="element">
-									<input type="reset" id="export_button" value="Esporta dati" onclick="show_popup('data_popup');hide_popup('graphup');hide_popup('graphdown')"/>
+									<input type="reset" id="to_export" value="Esporta dati" onclick='show_popup("data_popup");hide_popup("graphup");hide_popup("graphdown")'/>
 								</div>
 							</div>
 						</td>
@@ -213,13 +213,15 @@
 			</tr>
 		</table>
 	</div>
+	
 	<div id="data_popup">
-								<textarea id="data_table">
-										<!-- TABELLA AUTOGENERATA DI DATI DA ESPORTARE-->
-								</textarea>
-								<div id="element">
-									<input type="reset" id="hide" value="Nascondi dati" onclick="hide_popup('data_popup');"/>
-								</div>
-							</div>
+		<textarea id="data_table">
+				<!-- TABELLA AUTOGENERATA DI DATI DA ESPORTARE-->
+		</textarea>
+		<div id="element">
+				<input type="reset" id="hide" value="Nascondi dati" onclick="hide_popup('data_popup');show_popup('graphup');show_popup('graphdown');"/>
+		</div>
+	</div>
+	
   </body>
 </html>

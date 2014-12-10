@@ -93,7 +93,8 @@ table {
     width: 16em;
 	height: 100%;
 	text-align: center;
-    background: #50B0D0;
+    background: #6FBEDA;
+    /*background: #50B0D0;*/
     border: 0.15em solid #33A1C9;
     vertical-align: top;
     padding: 0;
@@ -159,6 +160,10 @@ input[type=number] {
 	border-radius: 0.25em;
 }
 
+#dE {
+	width: 6em;
+}
+
 #E_precision {
 	background: white;
 	width: 8em;
@@ -218,8 +223,8 @@ input[type=number] {
 	width: 98%;
     max-width: 98%;
 	height: 90%;
-	/*height: 54em; 
-    max-height: 54em;*/
+	/*height: 54em; */
+    max-height: 90%;
 }
 
 table {
