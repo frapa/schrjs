@@ -151,14 +151,6 @@
 				<table id="wrap2">
 					<tr>
 						<td id="graphs">
-							<div id="data_popup">
-								<textarea id="data_table">
-										<!-- TABELLA AUTOGENERATA DI DATI DA ESPORTARE-->
-								</textarea>
-								<div id="element">
-									<input type="reset" id="hide" value="Nascondi dati" onclick="console.log('pasagay');hide_popup('data_popup');show_popup('graphup');show_popup('graphdown');"/>
-								</div>
-							</div>
 							<div id="element">
 								<div id="graphup"></div>
 							</div>
@@ -205,10 +197,11 @@
         </td>
       </tr>
     </table>
+    
     <div id="wait_popup">
-		<br />Sto computando le soluzioni dell'equazione
-		<br /> prego aspettare
-		<br /> <br />
+		<p style="margin: 0.25em;">Sto computando le soluzioni dell'equazione, prego aspettare...</p>
+		<img src="wait.gif" style="border-radius: 64px; margin: 0.5em;" />
+		<br />
 		<table>
 			<tr>
 				<td id="pair">
@@ -220,5 +213,13 @@
 			</tr>
 		</table>
 	</div>
+	<div id="data_popup">
+								<textarea id="data_table">
+										<!-- TABELLA AUTOGENERATA DI DATI DA ESPORTARE-->
+								</textarea>
+								<div id="element">
+									<input type="reset" id="hide" value="Nascondi dati" onclick="hide_popup('data_popup');"/>
+								</div>
+							</div>
   </body>
 </html>

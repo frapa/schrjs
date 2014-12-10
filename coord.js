@@ -58,4 +58,5 @@ function solve() {
 
 function stop_computation() {
     worker.terminate();
+    hide_popup("wait_popup");
 }
