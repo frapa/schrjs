@@ -174,18 +174,20 @@ function display(D, V, ev, ef, t=0) {
 	};
 	data.innerHTML = to_data;
 	//--------------------------------------//
-	var export_button = document.getElementById("export");
+	var export_button = document.getElementById("export_button");
 	export_button.onclick="alert("+transpose(D.as_array(), ef)+".join('\n'));"
 }
 
 function show_popup(name) {
 	var popup = document.getElementById(name);
 	popup.style.visibility = "visible";
+	//	popup.removeAttribute('hidden');
 }
 
 function hide_popup(name) {
 	var popup = document.getElementById(name);
 	popup.style.visibility = "hidden";
+	//	popup.setAttribute('hidden', 'hidden');
 }
 
 function norm_check() {
